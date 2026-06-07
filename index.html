@@ -175,6 +175,23 @@
     background:rgba(255,180,58,.15);color:var(--amber);
     display:grid;place-items:center;font-size:.7rem;font-weight:700;
   }
+  .boost{
+    display:flex;align-items:center;gap:16px;
+    margin-top:26px;padding:18px 20px;
+    border:1px solid rgba(255,180,58,.28);
+    background:rgba(255,138,0,.06);
+    border-radius:14px;max-width:46ch;
+  }
+  .boost-badge{
+    flex:none;font-family:"Bricolage Grotesque",sans-serif;
+    font-weight:800;font-size:1.25rem;color:#1a1205;
+    background:linear-gradient(100deg,var(--amber),var(--amber-deep));
+    width:54px;height:54px;border-radius:12px;
+    display:grid;place-items:center;letter-spacing:-.03em;
+    box-shadow:0 8px 22px -10px rgba(255,138,0,.7);
+  }
+  .boost p{margin:0;color:#cfd0d2;font-size:.93rem;line-height:1.5}
+  .boost p b{color:var(--ink);font-weight:600}
 
   .offer-side{
     padding:44px 36px;
@@ -268,9 +285,13 @@
       <h2>Want all your inventory posted to Facebook Marketplace — twice every month?</h2>
       <p>We handle the listings so you don't have to. Full inventory, posted consistently, reaching real local buyers where they're already shopping — and interested buyers contact you directly, no middleman.</p>
       <div class="feat">
-        <div><span class="ck">✓</span> Entire inventory</div>
+        <div><span class="ck">✓</span> Automatic listing</div>
         <div><span class="ck">✓</span> Posted 2× / month</div>
         <div><span class="ck">✓</span> Buyers contact you directly</div>
+      </div>
+      <div class="boost">
+        <span class="boost-badge">20%</span>
+        <p><b>20% of your payment goes straight to boosting your vehicles</b> on Facebook Marketplace — putting your listings in front of even more local buyers.</p>
       </div>
     </div>
     <div class="offer-side">
