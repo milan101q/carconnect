@@ -26,6 +26,9 @@
   .sub{color:var(--muted);font-size:13px;max-width:660px;line-height:1.6}
   .alert{margin-top:16px;background:rgba(255,176,46,.07);border:1px solid var(--amber);border-left-width:4px;border-radius:var(--radius);padding:12px 14px;font-size:12px;line-height:1.6;color:var(--ink)}
   .alert b{color:var(--amber)}
+  .credit{margin-top:18px;display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line-2);border-left:3px solid var(--amber);border-radius:var(--radius);padding:10px 15px;font-size:12px;letter-spacing:.03em;color:var(--muted)}
+  .credit a{color:var(--amber);font-weight:600;text-decoration:none;transition:.15s}
+  .credit a:hover{text-decoration:underline}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px}
   @media(max-width:860px){.grid{grid-template-columns:1fr}}
   .card{background:var(--panel);border:1px solid var(--line-2);border-radius:var(--radius);box-shadow:0 1px 0 rgba(255,255,255,.02) inset,0 10px 30px -12px rgba(0,0,0,.6)}
@@ -154,7 +157,7 @@
     <div class="tag">Vehicle Recon Tool</div>
     <h1>Marketplace<span class="slash">/</span>Finder</h1>
     <p class="sub">Build pre-filtered Facebook Marketplace search links for every vehicle you're hunting, across every area you care about.</p>
-    <div class="alert"><b>Why your old links went to Texas:</b> a bare city name like <code>arlington</code> matches Arlington, TX (the bigger one), and <code>washington</code> matches Washington State. The only reliable location value is the exact segment from a Marketplace URL you've confirmed. Use <b>"Grab from URL"</b> below, and hit <b>Verify</b> on each area before generating.</div>
+    <div class="credit">This application is made by <a href="https://carconnect.click/" target="_blank" rel="noopener" title="CarConnect &#8212; Your Inventory on Facebook Marketplace">CarConnect.Click</a></div>
   </header>
 
   <div class="grid">
