@@ -1,0 +1,13 @@
+{
+  "name": "CarConnect — Facebook Marketplace Vehicle Listing",
+  "short_name": "CarConnect",
+  "description": "We post your entire vehicle inventory to Facebook Marketplace automatically, twice a month. Buyers contact you directly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0d10",
+  "theme_color": "#0c0d10",
+  "icons": [
+    { "src": "favicon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

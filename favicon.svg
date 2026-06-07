@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffc24d"/>
+      <stop offset="1" stop-color="#ff8a00"/>
+    </linearGradient>
+    <radialGradient id="head" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#ffb43a"/>
+      <stop offset="1" stop-color="#ff8a00"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" rx="15" fill="#0c0d10"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="13.5" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1.5"/>
+  <!-- car body -->
+  <path d="M12 38 q0 -2 2.5 -2.5 l3.5 -0.6 5 -7.2 q1.4 -1.9 3.8 -1.9 l11.2 0 q2.6 0 4.2 2.1 l4.6 6.4 3.4 0.9 q2.6 0.7 2.6 3.3 l0 3.5 q0 1.8 -1.9 1.8 l-2.1 0 a4.6 4.6 0 0 1 -9.1 0 l-12.4 0 a4.6 4.6 0 0 1 -9.1 0 l-1.4 0 q-1.9 0 -1.9 -1.8 z"
+        fill="url(#amber)"/>
+  <!-- windows -->
+  <path d="M27.3 28.6 l9.9 0 3.2 5.4 -16.8 0 z" fill="#0c0d10" fill-opacity="0.9"/>
+  <!-- wheels -->
+  <circle cx="23" cy="44" r="3.4" fill="#0c0d10"/>
+  <circle cx="44.5" cy="44" r="3.4" fill="#0c0d10"/>
+  <!-- headlight glow -->
+  <circle cx="51.5" cy="36.5" r="2.6" fill="url(#head)"/>
+</svg>
