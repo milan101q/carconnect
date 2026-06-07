@@ -82,12 +82,14 @@
     --amber-deep:#ff8a00;
     --line:rgba(255,255,255,.09);
     --card:rgba(255,255,255,.035);
+    --fb:#1877F2;
+    --fb-soft:rgba(24,119,242,.13);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
     font-family:"DM Sans",sans-serif;
-    background:var(--bg);
+    background:var(--bg) url("https://carconnect.click/bg.png") center center / cover no-repeat fixed;
     color:var(--ink);
     min-height:100vh;
     overflow-x:hidden;
@@ -101,7 +103,7 @@
     background:
       radial-gradient(900px 500px at 78% -8%, rgba(255,138,0,.16), transparent 60%),
       radial-gradient(700px 600px at 8% 105%, rgba(255,180,58,.08), transparent 60%),
-      linear-gradient(180deg,#0c0d10 0%,#0a0b0e 100%);
+      linear-gradient(180deg,rgba(12,13,16,.74) 0%,rgba(10,11,14,.88) 100%);
     z-index:-2;
   }
   /* subtle road-grid texture */
@@ -303,6 +305,16 @@
   .d4{animation-delay:.44s}.d5{animation-delay:.6s}
   @keyframes rise{to{opacity:1;transform:none}}
 
+  /* marketplace tag inside the price card */
+  .mp-tag{
+    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    color:#cfe0ff;background:var(--fb-soft);
+    border:1px solid rgba(24,119,242,.32);
+    padding:7px 12px;border-radius:99px;margin-bottom:20px;
+  }
+  .mp-tag svg{width:16px;height:16px;flex:none}
+
   @media(max-width:760px){
     .offer{grid-template-columns:1fr}
     .offer-side{border-left:none;border-top:1px solid var(--line)}
@@ -360,6 +372,10 @@
       </div>
     </div>
     <div class="offer-side">
+      <div class="mp-tag">
+        <svg viewBox="0 0 24 24" fill="#cfe0ff"><path d="M2.5 9 L5 4 H19 L21.5 9 Z"/><path d="M2.5 9 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 L21.5 9 Z"/></svg>
+        Live on Facebook Marketplace
+      </div>
       <div class="price">
         <span class="cur">$</span><span class="num">199</span><span class="per">/ month</span>
       </div>
