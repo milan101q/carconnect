@@ -94,8 +94,9 @@
   .site-foot{margin-top:30px;padding:22px 0 6px;border-top:2px solid var(--line-2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
   .site-foot .brand{font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:9px}
   .site-foot .brand::before{content:"";width:18px;height:2px;background:var(--amber)}
-  .site-foot a.fc{font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);text-decoration:none;border:1px solid var(--line-2);padding:9px 16px;border-radius:var(--radius);transition:.15s}
-  .site-foot a.fc:hover{border-color:var(--amber);background:rgba(255,176,46,.08)}
+  .site-foot a.fc{display:inline-flex;align-items:center;padding:4px;border-radius:var(--radius);text-decoration:none;transition:opacity .15s}
+  .site-foot a.fc:hover{opacity:.78}
+  .site-foot a.fc .fc-logo{height:32px;width:auto;max-width:240px;object-fit:contain;display:block}
 
   /* ---------- tablet ---------- */
   @media(max-width:860px){
@@ -137,7 +138,8 @@
     .chip .verify{order:3}
     .chip .x{order:4;margin-left:auto;font-size:20px;padding:0 6px}
     .site-foot{justify-content:center;text-align:center}
-    .site-foot a.fc{width:100%;text-align:center}
+    .site-foot a.fc{width:100%;justify-content:center}
+    .site-foot a.fc .fc-logo{max-width:80%}
   }
   @media(max-width:380px){
     h1{font-size:30px}
@@ -278,7 +280,9 @@
 
   <footer class="site-foot">
     <span class="brand">Marketplace / Finder</span>
-    <a class="fc" href="https://flowcetra.com/" target="_blank" rel="noopener">flowcetra.com &#8599;</a>
+    <a class="fc" href="https://flowcetra.com/" target="_blank" rel="noopener" aria-label="Flowcetra &#8212; flowcetra.com">
+      <img class="fc-logo" src="https://ppi.is-best.net/pictures/flowcetra1.png" alt="Flowcetra">
+    </a>
   </footer>
 </div>
 
