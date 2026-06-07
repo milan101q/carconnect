@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace Vehicle Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,800;0,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0e10;--panel:#16181b;--panel-2:#1d2024;--line:#2a2e33;--line-2:#383d44;
+    --ink:#e9eaec;--muted:#8b9199;--dim:#5f656d;--amber:#ffb02e;--amber-deep:#ff8a00;
+    --green:#5fd17a;--red:#ff5a52;--radius:4px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Mono",monospace}
+  body{min-height:100vh;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:42px 42px;background-position:center;position:relative;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% -10%,rgba(255,176,46,.08),transparent 55%);}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px 80px;position:relative;z-index:1}
+  header{padding:34px 0 22px;border-bottom:2px solid var(--line-2)}
+  .tag{font-size:11px;letter-spacing:.28em;color:var(--amber);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+  .tag::before{content:"";width:26px;height:2px;background:var(--amber)}
+  h1{font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(34px,6vw,62px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase;margin:10px 0 8px}
+  h1 .slash{color:var(--amber)}
+  .sub{color:var(--muted);font-size:13px;max-width:660px;line-height:1.6}
+  .alert{margin-top:16px;background:rgba(255,176,46,.07);border:1px solid var(--amber);border-left-width:4px;border-radius:var(--radius);padding:12px 14px;font-size:12px;line-height:1.6;color:var(--ink)}
+  .alert b{color:var(--amber)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line-2);border-radius:var(--radius);box-shadow:0 1px 0 rgba(255,255,255,.02) inset,0 10px 30px -12px rgba(0,0,0,.6)}
+  .card-h{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--panel-2)}
+  .card-h h2{font-family:"Archivo",sans-serif;font-weight:800;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+  .card-h .num{font-size:11px;color:var(--amber);letter-spacing:.1em}
+  .card-b{padding:16px}
+  label{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+  input,select{width:100%;background:var(--bg);border:1px solid var(--line-2);color:var(--ink);font-family:"IBM Plex Mono",monospace;font-size:13px;padding:9px 10px;border-radius:var(--radius);transition:border-color .15s,box-shadow .15s;}
+  input:focus,select:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(255,176,46,.12)}
+  input::placeholder{color:var(--dim)}
+  select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23ffb02e'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+  .row{display:flex;gap:10px}.row>*{flex:1}.field{margin-bottom:14px}
+  .btn{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line-2);background:var(--panel-2);color:var(--ink);padding:10px 14px;border-radius:var(--radius);cursor:pointer;font-size:12px;transition:.15s;display:inline-flex;align-items:center;gap:8px;justify-content:center;}
+  .btn:hover{border-color:var(--amber);color:var(--amber)}
+  .btn-primary{background:var(--amber);color:#1a1206;border-color:var(--amber);box-shadow:0 6px 18px -8px rgba(255,176,46,.7)}
+  .btn-primary:hover{background:var(--amber-deep);border-color:var(--amber-deep);color:#1a1206}
+  .btn-sm{padding:6px 9px;font-size:10px}
+  .list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .chip{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line-2);border-radius:var(--radius);padding:9px 11px}
+  .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);flex:none}
+  .chip .txt{flex:1;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .chip .meta{font-size:10px;color:var(--dim);letter-spacing:.08em;flex:none}
+  .chip .verify{font-size:10px;color:var(--green);text-decoration:none;border:1px solid var(--line-2);padding:4px 7px;border-radius:var(--radius);flex:none;font-family:"Archivo",sans-serif;font-weight:700;letter-spacing:.06em}
+  .chip .verify:hover{border-color:var(--green)}
+  .chip .x{cursor:pointer;color:var(--dim);font-size:16px;line-height:1;padding:0 4px;flex:none}
+  .chip .x:hover{color:var(--red)}
+  .empty{color:var(--dim);font-size:12px;text-align:center;padding:18px 0;border:1px dashed var(--line-2);border-radius:var(--radius)}
+  .preset-bar{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .preset{font-size:10px;letter-spacing:.06em;background:var(--panel-2);border:1px solid var(--line);color:var(--muted);padding:5px 9px;border-radius:20px;cursor:pointer;transition:.15s}
+  .preset:hover{border-color:var(--amber);color:var(--amber)}
+  .divider{display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--dim);font-size:10px;letter-spacing:.2em}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+  .results{margin-top:22px}
+  .results-h{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+  .results-h h2{font-family:"Archivo",sans-serif;font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:-.01em}
+  .results-h .count{color:var(--amber)}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap}
+  .link-grp{margin-bottom:18px}
+  .grp-title{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin:0 0 8px;display:flex;align-items:center;gap:8px}
+  .grp-title::after{content:"";flex:1;height:1px;background:var(--line)}
+  .link-row{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:11px 13px;margin-bottom:7px;transition:.15s}
+  .link-row:hover{border-color:var(--line-2);background:var(--panel-2)}
+  .link-row .area{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;min-width:120px;text-transform:uppercase;letter-spacing:.04em}
+  .link-row a.url{color:var(--muted);font-size:11px;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .link-row a.url:hover{color:var(--ink)}
+  .link-row .acts{display:flex;gap:6px;flex:none}
+  .icon-btn{cursor:pointer;border:1px solid var(--line-2);background:var(--bg);color:var(--muted);border-radius:var(--radius);padding:6px 10px;font-size:10px;font-family:"Archivo",sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:.15s}
+  .icon-btn:hover{border-color:var(--amber);color:var(--amber)}
+  .icon-btn.open{border-color:var(--amber);color:var(--amber)}
+  .icon-btn.open:hover{background:var(--amber);color:#1a1206}
+  .note{font-size:11px;color:var(--dim);line-height:1.6;margin-top:8px}
+  .note b{color:var(--muted)}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--amber);color:#1a1206;font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;padding:11px 20px;border-radius:var(--radius);opacity:0;transition:.25s;pointer-events:none;z-index:50;max-width:90vw;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast.err{background:var(--red);color:#fff}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:11px;color:var(--dim);line-height:1.7}
+  .foot b{color:var(--muted)}
+  details{margin-top:10px}
+  summary{cursor:pointer;color:var(--amber);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-family:"Archivo",sans-serif;font-weight:700}
+  details ol{margin:8px 0 0 18px}details li{margin-bottom:6px}
+  details p{margin-top:8px}
+  code{background:var(--panel-2);border:1px solid var(--line);padding:1px 5px;border-radius:3px;color:var(--amber);font-size:11px}
+
+  /* ---------- site footer (brand) ---------- */
+  .site-foot{margin-top:30px;padding:22px 0 6px;border-top:2px solid var(--line-2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  .site-foot .brand{font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:9px}
+  .site-foot .brand::before{content:"";width:18px;height:2px;background:var(--amber)}
+  .site-foot a.fc{font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);text-decoration:none;border:1px solid var(--line-2);padding:9px 16px;border-radius:var(--radius);transition:.15s}
+  .site-foot a.fc:hover{border-color:var(--amber);background:rgba(255,176,46,.08)}
+
+  /* ---------- tablet ---------- */
+  @media(max-width:860px){
+    .wrap{padding:0 16px 64px}
+    header{padding:28px 0 20px}
+  }
+
+  /* ---------- mobile ---------- */
+  @media(max-width:640px){
+    body{background-size:30px 30px}
+    .wrap{padding:0 13px 56px}
+    header{padding:22px 0 18px}
+    .sub{font-size:12.5px}
+    /* 16px inputs stop iOS from auto-zooming on focus; roomier touch targets */
+    input,select{font-size:16px;padding:12px 12px}
+    select{background-position:right 13px center}
+    .btn{padding:13px 14px}
+    .btn[style*="padding:14px"]{padding:15px 14px!important}
+    .btn-sm{padding:10px 12px;font-size:11px}
+    /* number rows wrap two-up instead of cramming three across */
+    .row{flex-wrap:wrap;gap:9px}
+    .row>*{flex:1 1 calc(50% - 5px);min-width:0}
+    /* the long Sort/Listed/Radius selects read better stacked full-width */
+    .row-opts>*{flex:1 1 100%}
+    /* results header + toolbar go full width, buttons split evenly */
+    .results-h h2{font-size:19px}
+    .toolbar{width:100%}
+    .toolbar .btn{flex:1}
+    /* link rows stack: label, then full-width url, then action buttons */
+    .link-row{flex-wrap:wrap;gap:8px;padding:12px}
+    .link-row .area{min-width:0;flex:1 1 100%;order:1}
+    .link-row a.url{flex:1 1 100%;order:2;white-space:normal;word-break:break-all;line-height:1.5}
+    .link-row .acts{flex:1 1 100%;order:3;gap:8px}
+    .link-row .acts .icon-btn{flex:1;text-align:center;padding:10px 12px;font-size:11px}
+    /* chips wrap rather than clipping the name */
+    .chip{flex-wrap:wrap}
+    .chip .txt{flex:1 1 100%;white-space:normal;order:1}
+    .chip .meta{order:2}
+    .chip .verify{order:3}
+    .chip .x{order:4;margin-left:auto;font-size:20px;padding:0 6px}
+    .site-foot{justify-content:center;text-align:center}
+    .site-foot a.fc{width:100%;text-align:center}
+  }
+  @media(max-width:380px){
+    h1{font-size:30px}
+    .card-b{padding:14px}
+    .row>*{flex:1 1 100%}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">Vehicle Recon Tool</div>
+    <h1>Marketplace<span class="slash">/</span>Finder</h1>
+    <p class="sub">Build pre-filtered Facebook Marketplace search links for every vehicle you're hunting, across every area you care about.</p>
+    <div class="alert"><b>Why your old links went to Texas:</b> a bare city name like <code>arlington</code> matches Arlington, TX (the bigger one), and <code>washington</code> matches Washington State. The only reliable location value is the exact segment from a Marketplace URL you've confirmed. Use <b>"Grab from URL"</b> below, and hit <b>Verify</b> on each area before generating.</div>
+  </header>
+
+  <div class="grid">
+    <!-- VEHICLES -->
+    <section class="card">
+      <div class="card-h"><h2>Vehicles</h2><span class="num">01</span></div>
+      <div class="card-b">
+        <div class="field"><label>Search Query</label><input id="vq" placeholder="e.g. Toyota Tacoma" autocomplete="off"></div>
+        <div class="row field">
+          <div><label>Min Price $</label><input id="vmin" type="number" placeholder="0" min="0"></div>
+          <div><label>Max Price $</label><input id="vmax" type="number" placeholder="any" min="0"></div>
+        </div>
+        <div class="row field">
+          <div><label>Min Year</label><input id="vyrmin" type="number" placeholder="any" min="1950" max="2030"></div>
+          <div><label>Max Year</label><input id="vyrmax" type="number" placeholder="any" min="1950" max="2030"></div>
+          <div><label>Max Miles</label><input id="vmiles" type="number" placeholder="any" min="0"></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%" onclick="addVehicle()">+ Add Vehicle</button>
+        <div class="preset-bar">
+          <span class="preset" onclick="quickVeh('Toyota Tacoma')">Toyota Tacoma</span>
+          <span class="preset" onclick="quickVeh('Honda Civic')">Honda Civic</span>
+          <span class="preset" onclick="quickVeh('Ford F-150')">Ford F-150</span>
+          <span class="preset" onclick="quickVeh('Subaru Outback')">Subaru Outback</span>
+          <span class="preset" onclick="quickVeh('Jeep Wrangler')">Jeep Wrangler</span>
+        </div>
+        <div class="list" id="vehList"></div>
+      </div>
+    </section>
+
+    <!-- AREAS -->
+    <section class="card">
+      <div class="card-h"><h2>Areas</h2><span class="num">02</span></div>
+      <div class="card-b">
+        <label>Grab From URL <span style="color:var(--green)">(recommended)</span></label>
+        <input id="aurl" placeholder="Paste a Marketplace URL from your browser" autocomplete="off">
+        <p class="note">Set your location on Facebook Marketplace, copy the URL from the address bar, paste it here. The tool pulls out the exact location for you.</p>
+        <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="addFromURL()">+ Add Area From URL</button>
+
+        <div class="divider">OR ENTER MANUALLY</div>
+        <div class="field"><label>Location Name (label)</label><input id="aname" placeholder="e.g. Northern Virginia" autocomplete="off"></div>
+        <div class="field"><label>Location Slug or Numeric ID</label><input id="aslug" placeholder="e.g. dc  or  108186792536760" autocomplete="off"></div>
+        <button class="btn" style="width:100%" onclick="addArea()">+ Add Manually</button>
+
+        <div class="preset-bar"><span class="preset" onclick="addPreset('Washington DC','dc')">+ Washington DC (verified: dc)</span></div>
+        <div class="list" id="areaList"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- GLOBAL OPTIONS -->
+  <section class="card" style="margin-top:22px">
+    <div class="card-h"><h2>Search Options</h2><span class="num">03</span></div>
+    <div class="card-b">
+      <div class="row row-opts">
+        <div><label>Sort By</label>
+          <select id="sort">
+            <option value="">Best Match</option>
+            <option value="creation_time_descend">Newest First</option>
+            <option value="price_ascend">Price: Low &#8594; High</option>
+            <option value="price_descend">Price: High &#8594; Low</option>
+            <option value="distance_ascend">Distance: Near &#8594; Far</option>
+          </select>
+        </div>
+        <div><label>Listed Within</label>
+          <select id="days">
+            <option value="">Any time</option>
+            <option value="1">Last 24 hours</option>
+            <option value="7">Last 7 days</option>
+            <option value="30">Last 30 days</option>
+          </select>
+        </div>
+        <div><label>Radius (mi)</label>
+          <select id="radius">
+            <option value="">Default</option>
+            <option value="2">2</option><option value="5">5</option><option value="10">10</option>
+            <option value="20">20</option><option value="40">40</option><option value="60">60</option>
+            <option value="100">100</option><option value="250">250</option><option value="500">500</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px">
+        <label>Match Mode</label>
+        <select id="exact">
+          <option value="true" selected>Exact &#8212; only listings containing your phrase (strict)</option>
+          <option value="false">Broad &#8212; include loosely related results (Facebook default)</option>
+        </select>
+        <p class="note">Exact keeps a "Toyota Tacoma" search from showing Dodges and Fords. Facebook may still occasionally pad results with shipped/related items &#8212; for a truly hard filter, use the <b>Make</b> dropdown in Marketplace's own left sidebar after the page loads.</p>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:6px;padding:14px" onclick="generate()">&#9881; Generate Search Links</button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results" id="results" style="display:none">
+    <div class="results-h">
+      <h2>Links <span class="count" id="linkCount">(0)</span></h2>
+      <div class="toolbar">
+        <button class="btn btn-sm" onclick="copyAll()">Copy All Links</button>
+        <button class="btn btn-sm btn-primary" onclick="openAll()">Open All Tabs</button>
+      </div>
+    </div>
+    <div id="linkBody"></div>
+    <p class="note" id="popupNote" style="display:none">&#9888; "Open All" opens many tabs at once &#8212; your browser may block pop-ups. Allow them for this page, then click again.</p>
+  </section>
+
+  <div class="foot">
+    <b>How this works:</b> Each link opens Facebook Marketplace's vehicle search already filtered to your query, price, year, mileage and sort for that area. No scraping, no login automation, nothing that risks your account.
+    <details open>
+      <summary>How to get the exact location for any town (do this once per area)</summary>
+      <ol>
+        <li>Open <code>facebook.com/marketplace</code> and click the <b>location</b> button (top-left).</li>
+        <li>Type your town (e.g. "Arlington, Virginia" &#8212; pick the right state from the dropdown), set a radius, hit Apply.</li>
+        <li>Now do any search. Look at the address bar &#8212; the URL is <code>facebook.com/marketplace/<u>SOMETHING</u>/search?...</code></li>
+        <li>Copy that whole URL and paste it into <b>"Grab From URL"</b> above. Done &#8212; that location is now guaranteed correct.</li>
+      </ol>
+      <p>Tip: hit <b>Verify</b> on each saved area &#8212; it opens that location's Marketplace so you can confirm it's the right city before generating links.</p>
+    </details>
+    <details>
+      <summary>Why not a fully automatic scraper?</summary>
+      <p>Facebook has no public Marketplace API; automated listing scraping violates their Terms, breaks on every layout change, trips CAPTCHAs and login walls, and can get your account restricted. This builder gives the same practical result &#8212; a tidy list of links to filtered results &#8212; without the risk.</p>
+    </details>
+  </div>
+
+  <footer class="site-foot">
+    <span class="brand">Marketplace / Finder</span>
+    <a class="fc" href="https://flowcetra.com/" target="_blank" rel="noopener">flowcetra.com &#8599;</a>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- safe storage (works downloaded; no-ops in sandbox) ---------- */
+const store = (() => {
+  let mem = {};
+  function ok(){ try { const k='__t'; localStorage.setItem(k,'1'); localStorage.removeItem(k); return true; } catch(e){ return false; } }
+  const has = ok();
+  return {
+    get(k){ try { return has ? localStorage.getItem(k) : mem[k]; } catch(e){ return mem[k]; } },
+    set(k,v){ try { if(has) localStorage.setItem(k,v); else mem[k]=v; } catch(e){ mem[k]=v; } }
+  };
+})();
+
+let vehicles = [];
+let areas = [];
+
+function loadState(){
+  try { vehicles = JSON.parse(store.get("mf_veh_v2")) || []; } catch(e){ vehicles = []; }
+  try { areas = JSON.parse(store.get("mf_area_v2")) || []; } catch(e){ areas = []; }
+  if(!areas.length) areas = [{name:"Washington DC", slug:"dc"}];
+}
+function save(){ store.set("mf_veh_v2", JSON.stringify(vehicles)); store.set("mf_area_v2", JSON.stringify(areas)); }
+
+/* ---------- vehicles ---------- */
+function quickVeh(q){ const el=document.getElementById('vq'); el.value=q; el.focus(); }
+function addVehicle(){
+  const q = document.getElementById('vq').value.trim();
+  if(!q){ toast("Enter a search query",true); return; }
+  vehicles.push({ q, min:val('vmin'), max:val('vmax'), yrmin:val('vyrmin'), yrmax:val('vyrmax'), miles:val('vmiles') });
+  ['vq','vmin','vmax','vyrmin','vyrmax','vmiles'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('vq').focus(); save(); renderVeh();
+}
+function val(id){ const v=document.getElementById(id).value.trim(); return v===""?null:v; }
+function renderVeh(){
+  const el=document.getElementById('vehList');
+  if(!vehicles.length){ el.innerHTML='<div class="empty">No vehicles yet &#8212; add one above</div>'; return; }
+  el.innerHTML = vehicles.map((v,i)=>{
+    const bits=[];
+    if(v.min||v.max) bits.push('$'+(v.min||'0')+'-'+(v.max||'&#8734;'));
+    if(v.yrmin||v.yrmax) bits.push((v.yrmin||'..')+'-'+(v.yrmax||'..'));
+    if(v.miles) bits.push('<'+Number(v.miles).toLocaleString()+'mi');
+    return `<div class="chip"><span class="dot"></span><span class="txt">${esc(v.q)}</span><span class="meta">${bits.join(' &#183; ')}</span><span class="x" onclick="delVeh(${i})">&times;</span></div>`;
+  }).join('');
+}
+function delVeh(i){ vehicles.splice(i,1); save(); renderVeh(); }
+
+/* ---------- areas ---------- */
+// Extract the location segment from a pasted Marketplace URL.
+function extractSlug(raw){
+  let s = raw.trim();
+  // strip protocol/host if present, then find /marketplace/<seg>/
+  let m = s.match(/marketplace\/([^\/?#]+)/i);
+  if(m && m[1]){
+    const seg = m[1].toLowerCase();
+    if(seg==='search'||seg==='category'||seg==='you'||seg==='item'||seg==='') return null;
+    return seg;
+  }
+  return null;
+}
+function addFromURL(){
+  const raw = document.getElementById('aurl').value;
+  if(!raw.trim()){ toast("Paste a Marketplace URL first",true); return; }
+  const slug = extractSlug(raw);
+  if(!slug){ toast("Couldn't find a location in that URL",true); return; }
+  const name = prettyName(slug);
+  pushArea(name, slug);
+  document.getElementById('aurl').value='';
+}
+function prettyName(slug){
+  if(/^\d+$/.test(slug)) return "Location " + slug.slice(0,6);
+  return slug.replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+}
+function addArea(){
+  const name=document.getElementById('aname').value.trim();
+  let slug=document.getElementById('aslug').value.trim();
+  if(!slug){ toast("Enter a location slug or ID",true); return; }
+  slug=slug.replace(/\s+/g,'').toLowerCase();
+  pushArea(name||prettyName(slug), slug);
+  document.getElementById('aname').value=''; document.getElementById('aslug').value='';
+}
+function pushArea(name, slug){
+  if(areas.some(a=>a.slug===slug)){ toast(name+" already added",true); return; }
+  areas.push({name, slug}); save(); renderAreas(); toast("Added "+name);
+}
+function renderAreas(){
+  const el=document.getElementById('areaList');
+  if(!areas.length){ el.innerHTML='<div class="empty">No areas yet &#8212; add one above</div>'; return; }
+  el.innerHTML = areas.map((a,i)=>`<div class="chip"><span class="dot"></span>
+    <span class="txt">${esc(a.name)}</span><span class="meta">/${esc(a.slug)}</span>
+    <a class="verify" href="https://www.facebook.com/marketplace/${encodeURIComponent(a.slug)}/" target="_blank" rel="noopener">Verify &#8599;</a>
+    <span class="x" onclick="delArea(${i})">&times;</span></div>`).join('');
+}
+function delArea(i){ areas.splice(i,1); save(); renderAreas(); }
+function addPreset(name,slug){ pushArea(name,slug); }
+
+/* ---------- URL building ---------- */
+function buildURL(slug, v){
+  const p=new URLSearchParams();
+  if(v.q) p.set('query', v.q);
+  if(v.min) p.set('minPrice', v.min);
+  if(v.max) p.set('maxPrice', v.max);
+  if(v.yrmin) p.set('minYear', v.yrmin);
+  if(v.yrmax) p.set('maxYear', v.yrmax);
+  if(v.miles) p.set('maxMileage', v.miles);
+  const sort=document.getElementById('sort').value, days=document.getElementById('days').value, radius=document.getElementById('radius').value;
+  if(sort) p.set('sortBy', sort);
+  if(days) p.set('daysSinceListed', days);
+  if(radius) p.set('radius', radius);
+  p.set('exact', document.getElementById('exact').value);
+  return `https://www.facebook.com/marketplace/${encodeURIComponent(slug)}/search?${p.toString()}`;
+}
+let lastLinks=[];
+function generate(){
+  if(!vehicles.length){ toast("Add at least one vehicle",true); return; }
+  if(!areas.length){ toast("Add at least one area",true); return; }
+  lastLinks=[];
+  const body=document.getElementById('linkBody'); body.innerHTML='';
+  let total=0;
+  vehicles.forEach(v=>{
+    const grp=document.createElement('div'); grp.className='link-grp';
+    let html=`<p class="grp-title">${esc(v.q)}</p>`;
+    areas.forEach(a=>{
+      const url=buildURL(a.slug, v); lastLinks.push(url); total++;
+      html+=`<div class="link-row"><span class="area">${esc(a.name)}</span>
+        <a class="url" href="${url}" target="_blank" rel="noopener">${esc(url)}</a>
+        <span class="acts">
+          <span class="icon-btn" onclick="copyOne('${url.replace(/'/g,"\\'")}')">Copy</span>
+          <a class="icon-btn open" href="${url}" target="_blank" rel="noopener">Open &#8599;</a>
+        </span></div>`;
+    });
+    grp.innerHTML=html; body.appendChild(grp);
+  });
+  document.getElementById('linkCount').textContent=`(${total})`;
+  document.getElementById('results').style.display='block';
+  document.getElementById('popupNote').style.display = lastLinks.length>5 ? 'block':'none';
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ---------- actions ---------- */
+function copyOne(url){ navigator.clipboard.writeText(url).then(()=>toast("Link copied")); }
+function copyAll(){ if(!lastLinks.length) return; navigator.clipboard.writeText(lastLinks.join('\n')).then(()=>toast(lastLinks.length+" links copied")); }
+function openAll(){ if(!lastLinks.length) return; lastLinks.forEach(u=>window.open(u,'_blank')); toast("Opening "+lastLinks.length+" tabs"); }
+
+/* ---------- utils ---------- */
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+let toastT;
+function toast(msg,err){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.toggle('err',!!err); t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2000); }
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter') return;
+  const a=document.activeElement;
+  if(a===document.getElementById('vq')) addVehicle();
+  else if(a===document.getElementById('aurl')) addFromURL();
+  else if(a===document.getElementById('aslug')) addArea();
+});
+
+loadState(); renderVeh(); renderAreas();
+</script>
+</body>
+</html>
