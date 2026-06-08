@@ -122,26 +122,76 @@
   .wrap{
     max-width:1080px;
     margin:0 auto;
-    padding:36px 28px 80px;
+    padding:7vh 28px 80px;
     position:relative;
   }
 
-  /* nav */
-  nav{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-bottom:9vh;
+  /* sticky top bar */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(11,12,15,.72);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border-bottom:1px solid var(--line);
   }
+  .topbar-inner{
+    max-width:1080px;margin:0 auto;
+    padding:11px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:18px;
+  }
+  .nav-links{display:flex;align-items:center;gap:10px}
+  .nav-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"DM Sans",sans-serif;font-weight:600;font-size:.92rem;
+    color:var(--ink);text-decoration:none;white-space:nowrap;
+    padding:10px 16px;border-radius:11px;
+    border:1px solid var(--line);background:var(--card);
+    transition:transform .25s,border-color .25s,background .25s,box-shadow .25s;
+  }
+  .nav-btn svg{width:17px;height:17px;flex:none}
+  .nav-btn:hover{transform:translateY(-2px);border-color:rgba(255,180,58,.5);background:rgba(255,255,255,.06)}
+  .nav-btn-fb{border-color:rgba(24,119,242,.4);background:var(--fb-soft);color:#cfe0ff}
+  .nav-btn-fb:hover{border-color:rgba(24,119,242,.7);background:rgba(24,119,242,.2)}
+  .nav-btn-accent{
+    background:linear-gradient(100deg,var(--amber),var(--amber-deep));
+    color:#1a1205;border-color:transparent;font-weight:700;
+    box-shadow:0 10px 26px -12px rgba(255,138,0,.6);
+  }
+  .nav-btn-accent:hover{transform:translateY(-2px);color:#1a1205;box-shadow:0 16px 32px -12px rgba(255,138,0,.8)}
+  #dealers{scroll-margin-top:90px}
   .brand{
-    display:flex;align-items:center;gap:11px;
+    display:flex;align-items:center;gap:13px;
+    text-decoration:none;color:inherit;
     font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:800;font-size:1.35rem;letter-spacing:-.02em;
   }
-  .brand .dot{
-    width:13px;height:13px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,#fff,var(--amber) 45%,var(--amber-deep));
-    box-shadow:0 0 18px rgba(255,138,0,.8);
+  .brand-mark{
+    width:46px;height:46px;flex:none;display:block;
+    filter:drop-shadow(0 8px 18px rgba(255,138,0,.30));
+    transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s;
   }
-  .brand b{color:var(--amber)}
+  .brand:hover .brand-mark{
+    transform:translateY(-2px) rotate(-3deg);
+    filter:drop-shadow(0 14px 28px rgba(255,138,0,.52));
+  }
+  .brand-mark .cc-signal{
+    animation:ccPulse 3.4s ease-in-out infinite;
+  }
+  @keyframes ccPulse{0%,100%{opacity:.55}50%{opacity:1}}
+  .brand-name{display:flex;flex-direction:column;line-height:1}
+  .brand-name .word{
+    display:inline-flex;
+    font-weight:800;font-size:1.42rem;letter-spacing:-.025em;
+  }
+  .brand-name .word b{
+    font-weight:800;margin-left:.04em;
+    background:linear-gradient(100deg,var(--amber),var(--amber-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .brand-name .tag{
+    font-family:"DM Sans",sans-serif;font-weight:600;
+    font-size:.57rem;letter-spacing:.27em;text-transform:uppercase;
+    color:var(--muted);margin-top:5px;padding-left:.12em;
+  }
   .pill{
     font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
     color:var(--muted);border:1px solid var(--line);
@@ -320,22 +370,91 @@
     .offer-side{border-left:none;border-top:1px solid var(--line)}
     .offer-main{padding:34px 28px}
     .offer-side{padding:34px 28px}
-    nav{margin-bottom:6vh}
-    .pill{display:none}
+    .topbar-inner{padding:9px 14px;gap:10px}
+    .brand-name .tag{display:none}
+    .nav-links{gap:7px}
+    .nav-btn{padding:9px 12px;font-size:.84rem;gap:6px}
+  }
+  @media(max-width:520px){
+    .brand-name{display:none}
+    .nav-btn .lbl{display:none}
+    .nav-btn-accent .lbl{display:inline}
+    .nav-btn{padding:9px 11px}
+    .nav-btn-accent{padding:9px 13px}
   }
   @media(prefers-reduced-motion:reduce){
     .reveal{animation:none;opacity:1;transform:none}
     .btn,.wa{transition:none}
+    .brand-mark{transition:none}
+    .brand-mark .cc-signal{animation:none;opacity:.85}
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <nav class="reveal d1">
-    <div class="brand"><span class="dot"></span>Car<b>Connect</b></div>
-    <span class="pill">Marketplace Vehicle Service</span>
-  </nav>
+<header class="topbar reveal d1">
+  <div class="topbar-inner">
+    <a class="brand" href="/" aria-label="CarConnect — home">
+      <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="CarConnect — cars on Facebook Marketplace">
+        <defs>
+          <linearGradient id="ccBody" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffe1a3"/>
+            <stop offset=".45" stop-color="#ffb43a"/>
+            <stop offset="1" stop-color="#ff8a00"/>
+          </linearGradient>
+          <linearGradient id="ccAwn" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3b95ff"/>
+            <stop offset="1" stop-color="#1877F2"/>
+          </linearGradient>
+          <radialGradient id="ccHead" cx=".35" cy=".3" r=".85">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset=".5" stop-color="#ffd277"/>
+            <stop offset="1" stop-color="#ff8a00"/>
+          </radialGradient>
+          <linearGradient id="ccGlass" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity=".14"/>
+            <stop offset=".55" stop-color="#ffffff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- badge -->
+        <rect x="1" y="1" width="62" height="62" rx="16" fill="#14161b"/>
+        <rect x="1" y="1" width="62" height="62" rx="16" fill="url(#ccGlass)"/>
+        <rect x="1.5" y="1.5" width="61" height="61" rx="15.5" fill="none" stroke="#ffffff" stroke-opacity=".1" stroke-width="1"/>
+        <!-- Facebook Marketplace storefront awning -->
+        <path d="M13 27 L16 14 Q16.6 11.5 19 11.5 L45 11.5 Q47.4 11.5 48 14 L51 27 q-4.75 4 -9.5 0 q-4.75 4 -9.5 0 q-4.75 4 -9.5 0 q-4.75 4 -9.5 0 z" fill="url(#ccAwn)"/>
+        <path d="M16 14 Q16.6 11.5 19 11.5 L45 11.5 Q47.4 11.5 48 14 L48.6 16.5 L15.4 16.5 z" fill="#ffffff" fill-opacity=".18"/>
+        <!-- car under the awning -->
+        <g transform="translate(0,1.5) scale(0.97)">
+          <path d="M14 40 q0 -1.8 2.3 -2.3 l3.2 -0.55 4.6 -6.6 q1.3 -1.75 3.5 -1.75 l10.3 0 q2.4 0 3.85 1.95 l4.2 5.9 3.1 0.83 q2.4 0.65 2.4 3.05 l0 3.2 q0 1.65 -1.75 1.65 l-1.95 0 a4.2 4.2 0 0 1 -8.4 0 l-11.4 0 a4.2 4.2 0 0 1 -8.4 0 l-1.3 0 q-1.75 0 -1.75 -1.65 z" fill="url(#ccBody)"/>
+          <path d="M28 31.4 l9 0 2.95 4.95 -15.4 0 z" fill="#14161b"/>
+          <circle cx="24.5" cy="44.5" r="3.1" fill="#14161b"/><circle cx="24.5" cy="44.5" r="1.35" fill="url(#ccBody)"/>
+          <circle cx="44.3" cy="44.5" r="3.1" fill="#14161b"/><circle cx="44.3" cy="44.5" r="1.35" fill="url(#ccBody)"/>
+          <circle cx="50.8" cy="37.4" r="2.3" fill="url(#ccHead)"/>
+        </g>
+      </svg>
+      <span class="brand-name">
+        <span class="word">Car<b>Connect</b></span>
+        <span class="tag">On Facebook Marketplace</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-btn nav-btn-fb" href="https://www.facebook.com/marketplace/profile/61559047695077/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 5 4h14l2 5"/><path d="M3 9c1.7 1.8 3.6 1.8 5.3 0 1.7 1.8 3.6 1.8 5.4 0 1.7 1.8 3.6 1.8 5.3 0"/><path d="M4.5 12.5V20h15v-7.5"/></svg>
+        <span class="lbl">Inventory</span>
+      </a>
+      <a class="nav-btn nav-btn-fb" href="https://carconnect.click/search" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span class="lbl">Smart Search</span>
+      </a>
+      <a class="nav-btn nav-btn-accent" href="#dealers">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9 5 4h14l2 5a3 3 0 0 1-5.2 2A3 3 0 0 1 12 11a3 3 0 0 1-3.8 0A3 3 0 0 1 3 9z"/><path d="M5 12.5V20h14v-7.5"/></svg>
+        <span class="lbl">For Dealers</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
 
   <header>
     <span class="eyebrow reveal d1">Vehicles · Listed · Sold</span>
@@ -356,7 +475,7 @@
     </div>
   </header>
 
-  <section class="offer reveal d5">
+  <section class="offer reveal d5" id="dealers">
     <div class="offer-main">
       <div class="offer-tag">For Dealers &amp; Sellers</div>
       <h2>Want all your inventory posted to Facebook Marketplace — twice every month?</h2>
