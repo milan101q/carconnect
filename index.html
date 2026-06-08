@@ -157,7 +157,13 @@
     color:#1a1205;border-color:transparent;font-weight:700;
     box-shadow:0 10px 26px -12px rgba(255,138,0,.6);
   }
-  .nav-btn-accent:hover{transform:translateY(-2px);color:#1a1205;box-shadow:0 16px 32px -12px rgba(255,138,0,.8)}
+  .nav-btn-accent:hover,
+  .nav-btn-accent:active,
+  .nav-btn-accent:focus-visible{
+    transform:translateY(-2px);color:#1a1205;border-color:transparent;
+    background:linear-gradient(100deg,#ffcf6b,var(--amber));
+    box-shadow:0 16px 34px -12px rgba(255,138,0,.9);
+  }
   #dealers{scroll-margin-top:90px}
   .brand{
     display:flex;align-items:center;gap:13px;
