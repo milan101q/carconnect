@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Primary SEO -->
-<title>CarConnect | List Your Vehicle Inventory on Facebook Marketplace</title>
-<meta name="description" content="CarConnect posts your entire vehicle inventory to Facebook Marketplace automatically, twice a month, for $199/month. Buyers contact you directly. Browse our inventory or search Marketplace listings now.">
-<meta name="keywords" content="Facebook Marketplace cars, car inventory listing, dealer marketplace posting, sell cars online, vehicle marketplace finder, automatic car listing, used cars, auto dealer marketing">
+<title>CarConnect | Post Your Dealer Inventory on Facebook Marketplace</title>
+<meta name="description" content="CarConnect posts your vehicle inventory to Facebook Marketplace every week for a month. One-time packages from $199 for up to 20 cars. No subscription. Buyers contact you directly.">
+<meta name="keywords" content="Facebook Marketplace cars, dealer marketplace posting, car inventory listing, auction inventory listing, sell cars online, automatic car listing, used car dealer marketing">
 <meta name="author" content="CarConnect">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#0c0d10">
@@ -24,8 +24,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CarConnect">
 <meta property="og:url" content="https://carconnect.click/">
-<meta property="og:title" content="CarConnect | List Your Vehicle Inventory on Facebook Marketplace">
-<meta property="og:description" content="We post your entire inventory to Facebook Marketplace automatically, twice a month, for $199/month. Buyers contact you directly.">
+<meta property="og:title" content="CarConnect | Post Your Dealer Inventory on Facebook Marketplace">
+<meta property="og:description" content="We post your inventory to Facebook Marketplace every week for a month. One-time packages from $199, no subscription. Buyers contact you directly.">
 <meta property="og:image" content="https://carconnect.click/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -33,8 +33,8 @@
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="CarConnect | List Your Vehicle Inventory on Facebook Marketplace">
-<meta name="twitter:description" content="We post your entire inventory to Facebook Marketplace automatically, twice a month, for $199/month. Buyers contact you directly.">
+<meta name="twitter:title" content="CarConnect | Post Your Dealer Inventory on Facebook Marketplace">
+<meta name="twitter:description" content="We post your inventory to Facebook Marketplace every week for a month. One-time packages from $199, no subscription. Buyers contact you directly.">
 <meta name="twitter:image" content="https://carconnect.click/og-image.png">
 
 <!-- Structured data -->
@@ -42,9 +42,9 @@
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "CarConnect Facebook Marketplace Vehicle Listing",
-  "serviceType": "Vehicle inventory listing on Facebook Marketplace",
-  "description": "Automatic posting of your entire vehicle inventory to Facebook Marketplace and 20 Facebook car-buying groups twice per month. Buyers contact you directly. 10% of payment is used to boost your vehicles on Marketplace.",
+  "name": "CarConnect Facebook Marketplace Vehicle Posting",
+  "serviceType": "Vehicle inventory posting on Facebook Marketplace",
+  "description": "Your vehicle inventory posted to Facebook Marketplace weekly for one month per order, with no subscription. Buyers contact you directly. 10% of your payment is used to boost your vehicles on Marketplace.",
   "url": "https://carconnect.click/",
   "provider": {
     "@type": "Organization",
@@ -53,13 +53,11 @@
     "logo": "https://carconnect.click/favicon-512.png"
   },
   "areaServed": "US",
-  "offers": {
-    "@type": "Offer",
-    "price": "199",
-    "priceCurrency": "USD",
-    "description": "Entire inventory posted to Facebook Marketplace and 20 Facebook car-buying groups twice per month, flat rate with no contracts.",
-    "availability": "https://schema.org/InStock"
-  },
+  "offers": [
+    {"@type":"Offer","name":"Starter — up to 20 vehicles","price":"199","priceCurrency":"USD","availability":"https://schema.org/InStock"},
+    {"@type":"Offer","name":"Growth — up to 40 vehicles","price":"349","priceCurrency":"USD","availability":"https://schema.org/InStock"},
+    {"@type":"Offer","name":"Pro — up to 60 vehicles","price":"599","priceCurrency":"USD","availability":"https://schema.org/InStock"}
+  ],
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "sales",
@@ -71,439 +69,326 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0c0d10;
     --bg-2:#121419;
+    --bg-3:#171a20;
     --ink:#f4f1ea;
+    --ink-2:#cfd0d2;
     --muted:#9a9c9f;
     --amber:#ffb43a;
     --amber-deep:#ff8a00;
     --line:rgba(255,255,255,.09);
+    --line-2:rgba(255,255,255,.14);
     --card:rgba(255,255,255,.035);
     --fb:#1877F2;
     --fb-soft:rgba(24,119,242,.13);
+    --ok:#37c46f;
+    --radius:20px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    font-family:"DM Sans",sans-serif;
+    font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
     background:var(--bg) url("https://carconnect.click/bg.png") center center / cover no-repeat fixed;
     color:var(--ink);
     min-height:100vh;
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
     position:relative;
+    line-height:1.5;
   }
-  /* atmospheric background */
   body::before{
-    content:"";
-    position:fixed;inset:0;
+    content:"";position:fixed;inset:0;
     background:
-      radial-gradient(900px 500px at 78% -8%, rgba(255,138,0,.16), transparent 60%),
-      radial-gradient(700px 600px at 8% 105%, rgba(255,180,58,.08), transparent 60%),
-      linear-gradient(180deg,rgba(12,13,16,.74) 0%,rgba(10,11,14,.88) 100%);
+      radial-gradient(900px 500px at 78% -8%, rgba(255,138,0,.14), transparent 60%),
+      radial-gradient(700px 600px at 8% 105%, rgba(255,180,58,.07), transparent 60%),
+      linear-gradient(180deg,rgba(12,13,16,.82) 0%,rgba(10,11,14,.93) 100%);
     z-index:-2;
   }
-  /* subtle road-grid texture */
   body::after{
-    content:"";
-    position:fixed;inset:0;
+    content:"";position:fixed;inset:0;
     background-image:
-      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
     background-size:64px 64px;
-    mask-image:radial-gradient(circle at 50% 35%,#000 0%,transparent 75%);
-    z-index:-1;
-    opacity:.6;
+    mask-image:radial-gradient(circle at 50% 30%,#000 0%,transparent 75%);
+    -webkit-mask-image:radial-gradient(circle at 50% 30%,#000 0%,transparent 75%);
+    z-index:-1;opacity:.6;
   }
+  body.modal-open{overflow:hidden}
+  h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif}
+  a{color:inherit}
 
-  .wrap{
-    max-width:1080px;
-    margin:0 auto;
-    padding:7vh 28px 80px;
-    position:relative;
-  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;position:relative}
 
-  /* sticky top bar */
+  /* ===== top bar ===== */
   .topbar{
     position:sticky;top:0;z-index:60;
-    background:rgba(11,12,15,.72);
+    background:rgba(11,12,15,.78);
     backdrop-filter:blur(16px) saturate(140%);
     -webkit-backdrop-filter:blur(16px) saturate(140%);
     border-bottom:1px solid var(--line);
   }
   .topbar-inner{
-    max-width:1080px;margin:0 auto;
-    padding:11px 28px;
+    max-width:1120px;margin:0 auto;padding:11px 28px;
     display:flex;align-items:center;justify-content:space-between;gap:18px;
   }
-  .nav-links{display:flex;align-items:center;gap:10px}
-  .nav-btn{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:"DM Sans",sans-serif;font-weight:600;font-size:.92rem;
-    color:var(--ink);text-decoration:none;white-space:nowrap;
-    padding:10px 16px;border-radius:11px;
-    border:1px solid var(--line);background:var(--card);
-    transition:transform .25s,border-color .25s,background .25s,box-shadow .25s;
+  .nav-links{display:flex;align-items:center;gap:6px}
+  .nav-link{
+    font-weight:500;font-size:.93rem;color:var(--ink-2);text-decoration:none;
+    padding:10px 13px;border-radius:10px;white-space:nowrap;
+    transition:color .2s,background .2s;
   }
-  .nav-btn svg{width:17px;height:17px;flex:none}
-  .nav-btn:hover{transform:translateY(-2px);border-color:rgba(255,180,58,.5);background:rgba(255,255,255,.06)}
-  .nav-btn-fb{border-color:rgba(24,119,242,.4);background:var(--fb-soft);color:#cfe0ff}
-  .nav-btn-fb:hover{border-color:rgba(24,119,242,.7);background:rgba(24,119,242,.2)}
-  .nav-btn-accent{
+  .nav-link:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;margin-left:8px;
+    font-weight:700;font-size:.93rem;text-decoration:none;white-space:nowrap;
+    color:#1a1205;padding:11px 18px;border-radius:11px;
     background:linear-gradient(100deg,var(--amber),var(--amber-deep));
-    color:#1a1205;border-color:transparent;font-weight:700;
     box-shadow:0 10px 26px -12px rgba(255,138,0,.6);
+    transition:transform .25s,box-shadow .25s;
   }
-  .nav-btn-accent:hover,
-  .nav-btn-accent:active,
-  .nav-btn-accent:focus-visible{
-    transform:translateY(-2px);color:#1a1205;border-color:transparent;
-    background:linear-gradient(100deg,#ffcf6b,var(--amber));
-    box-shadow:0 16px 34px -12px rgba(255,138,0,.9);
-  }
-  #dealers{scroll-margin-top:90px}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(255,138,0,.9)}
+  .nav-cta svg{width:17px;height:17px}
+
   .brand{
     display:flex;align-items:center;gap:13px;
     text-decoration:none;color:inherit;
     font-family:"Bricolage Grotesque",sans-serif;
   }
   .brand-mark{
-    width:46px;height:46px;flex:none;display:block;
+    width:44px;height:44px;flex:none;display:block;
     filter:drop-shadow(0 8px 18px rgba(255,138,0,.30));
     transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s;
   }
-  .brand:hover .brand-mark{
-    transform:translateY(-2px) rotate(-3deg);
-    filter:drop-shadow(0 14px 28px rgba(255,138,0,.52));
-  }
-  .brand-mark .cc-signal{
-    animation:ccPulse 3.4s ease-in-out infinite;
-  }
-  @keyframes ccPulse{0%,100%{opacity:.55}50%{opacity:1}}
+  .brand:hover .brand-mark{transform:translateY(-2px) rotate(-3deg)}
   .brand-name{display:flex;flex-direction:column;line-height:1}
-  .brand-name .word{
-    display:inline-flex;
-    font-weight:800;font-size:1.42rem;letter-spacing:-.025em;
-  }
+  .brand-name .word{display:inline-flex;font-weight:800;font-size:1.38rem;letter-spacing:-.025em}
   .brand-name .word b{
     font-weight:800;margin-left:.04em;
     background:linear-gradient(100deg,var(--amber),var(--amber-deep));
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
   .brand-name .tag{
-    font-family:"DM Sans",sans-serif;font-weight:600;
-    font-size:.57rem;letter-spacing:.27em;text-transform:uppercase;
-    color:var(--muted);margin-top:5px;padding-left:.12em;
-  }
-  .pill{
-    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--muted);border:1px solid var(--line);
-    padding:8px 14px;border-radius:99px;
+    font-family:"DM Sans",sans-serif;font-weight:500;
+    font-size:.72rem;color:var(--muted);margin-top:5px;
   }
 
-  /* hero */
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:9px;
-    font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--amber);font-weight:600;
+  /* ===== hero ===== */
+  .hero{padding:12vh 0 4vh;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+  .kicker{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.88rem;color:var(--ink-2);font-weight:500;
+    padding:7px 14px 7px 8px;border-radius:99px;
+    border:1px solid rgba(24,119,242,.32);background:var(--fb-soft);
     margin-bottom:26px;
   }
-  .eyebrow::before{
-    content:"";width:30px;height:1px;background:var(--amber);display:block;
-  }
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(55,196,111,.18);margin-left:4px}
   h1{
-    font-family:"Bricolage Grotesque",sans-serif;
     font-weight:800;
-    font-size:clamp(2.7rem,7vw,5.4rem);
-    line-height:.98;
-    letter-spacing:-.035em;
-    max-width:14ch;
-  }
-  h1 .glow{
-    background:linear-gradient(95deg,var(--amber),#fff 60%,var(--amber-deep));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-size:clamp(2.5rem,6.2vw,4.6rem);
+    line-height:1;letter-spacing:-.035em;max-width:15ch;
   }
   .lede{
-    color:var(--muted);
-    font-size:clamp(1.05rem,2vw,1.28rem);
-    line-height:1.6;
-    max-width:52ch;
-    margin-top:28px;
+    color:var(--muted);font-size:clamp(1.05rem,1.8vw,1.22rem);
+    line-height:1.6;max-width:50ch;margin-top:24px;
   }
-
-  /* buttons */
-  .cta-row{
-    display:flex;flex-wrap:wrap;gap:16px;
-    margin-top:42px;
-  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
   .btn{
-    display:inline-flex;align-items:center;gap:12px;
-    font-weight:600;font-size:1.02rem;
-    padding:18px 30px;border-radius:14px;
+    display:inline-flex;align-items:center;justify-content:center;gap:11px;
+    font-family:"DM Sans",sans-serif;font-weight:600;font-size:1rem;
+    padding:16px 26px;border-radius:13px;border:1px solid transparent;
     text-decoration:none;cursor:pointer;
-    transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s;
-    position:relative;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s,border-color .25s;
   }
-  .btn svg{width:20px;height:20px;flex:none}
+  .btn svg{width:19px;height:19px;flex:none}
   .btn-primary{
     background:linear-gradient(100deg,var(--amber),var(--amber-deep));
-    color:#1a1205;
+    color:#1a1205;font-weight:700;
     box-shadow:0 14px 40px -12px rgba(255,138,0,.6);
   }
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 50px -12px rgba(255,138,0,.75)}
-  .btn-ghost{
-    background:var(--card);
-    color:var(--ink);
-    border:1px solid var(--line);
-    backdrop-filter:blur(8px);
-  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 50px -12px rgba(255,138,0,.8)}
+  .btn-ghost{background:var(--card);color:var(--ink);border-color:var(--line)}
   .btn-ghost:hover{transform:translateY(-3px);border-color:rgba(255,180,58,.5);background:rgba(255,255,255,.06)}
-  .btn .arr{transition:transform .25s}
-  .btn:hover .arr{transform:translate(3px,-3px)}
+  .btn-block{width:100%}
 
-  /* offer card */
-  .offer{
-    margin-top:11vh;
-    display:grid;grid-template-columns:1.4fr 1fr;gap:0;
-    border:1px solid var(--line);
-    border-radius:22px;
-    overflow:hidden;
+  .hero-links{display:flex;flex-wrap:wrap;gap:22px;margin-top:22px}
+  .hero-links a{
+    display:inline-flex;align-items:center;gap:7px;
+    color:var(--ink-2);font-size:.93rem;text-decoration:none;
+    border-bottom:1px solid var(--line-2);padding-bottom:2px;
+    transition:color .2s,border-color .2s;
+  }
+  .hero-links a:hover{color:var(--amber);border-color:var(--amber)}
+  .hero-links svg{width:15px;height:15px}
+
+  /* hero side: price summary panel */
+  .hero-panel{
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(180deg,var(--bg-2),rgba(18,20,25,.55));
+    padding:26px;position:relative;overflow:hidden;
+  }
+  .hero-panel::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(360px 220px at 100% 0%,rgba(255,138,0,.16),transparent 65%);
+  }
+  .hero-panel h2{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  .hero-panel .hp-sub{color:var(--muted);font-size:.88rem;margin-bottom:18px}
+  .hp-row{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 0;border-top:1px solid var(--line);
+  }
+  .hp-row .cars{font-weight:600}
+  .hp-row .cars small{display:block;color:var(--muted);font-weight:400;font-size:.8rem;margin-top:2px}
+  .hp-row .amt{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.03em}
+  .hp-row .amt span{font-size:.8rem;color:var(--muted);font-weight:500;font-family:"DM Sans",sans-serif;letter-spacing:0}
+  .hero-panel .btn{margin-top:14px}
+
+  /* trust strip */
+  .trust{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line);border-radius:16px;
+    background:rgba(255,255,255,.02);margin-top:6vh;
+  }
+  .trust div{padding:20px 22px;border-left:1px solid var(--line)}
+  .trust div:first-child{border-left:none}
+  .trust b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.05rem;letter-spacing:-.01em}
+  .trust span{color:var(--muted);font-size:.86rem}
+
+  /* ===== section headers ===== */
+  section{scroll-margin-top:84px}
+  .sec{padding-top:13vh}
+  .sec-head{max-width:640px;margin-bottom:42px}
+  .sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+  .sec-head h2{
+    font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);
+    line-height:1.06;letter-spacing:-.03em;
+  }
+  .sec-head p{color:var(--muted);font-size:clamp(1rem,1.6vw,1.12rem);line-height:1.6;margin-top:14px}
+
+  /* ===== how it works ===== */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+  .step{
+    border:1px solid var(--line);border-radius:var(--radius);
     background:linear-gradient(180deg,var(--bg-2),rgba(18,20,25,.4));
-    position:relative;
+    padding:28px 26px;
   }
-  .offer::before{
-    content:"";position:absolute;inset:0;
-    background:radial-gradient(500px 300px at 100% 0%,rgba(255,138,0,.14),transparent 65%);
-    pointer-events:none;
+  .step .n{
+    counter-increment:step;
+    width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+    font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+    color:#1a1205;background:linear-gradient(100deg,var(--amber),var(--amber-deep));
+    margin-bottom:20px;
   }
-  .offer-main{padding:44px 42px}
-  .offer-tag{
-    font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--amber);font-weight:600;margin-bottom:16px;
+  .step .n::before{content:counter(step)}
+  .step h3{font-size:1.18rem;font-weight:700;letter-spacing:-.015em}
+  .step p{color:var(--muted);font-size:.95rem;line-height:1.6;margin-top:8px}
+
+  /* ===== pricing ===== */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+  .plan{
+    position:relative;display:flex;flex-direction:column;
+    border:1px solid var(--line);border-radius:22px;
+    background:linear-gradient(180deg,var(--bg-2),rgba(18,20,25,.5));
+    padding:32px 28px;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s;
   }
-  .offer-main h2{
-    font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:700;font-size:clamp(1.5rem,3vw,2.05rem);
-    line-height:1.12;letter-spacing:-.025em;
-    max-width:20ch;
+  .plan:hover{transform:translateY(-4px);border-color:var(--line-2)}
+  .plan.featured{
+    border-color:rgba(255,180,58,.55);
+    background:
+      radial-gradient(420px 240px at 50% 0%,rgba(255,138,0,.16),transparent 70%),
+      linear-gradient(180deg,var(--bg-3),rgba(18,20,25,.6));
+    box-shadow:0 30px 60px -30px rgba(255,138,0,.45);
   }
-  .offer-main p{color:var(--muted);margin-top:16px;line-height:1.6;max-width:42ch}
-  .feat{display:flex;gap:22px;margin-top:26px;flex-wrap:wrap}
-  .feat div{display:flex;align-items:center;gap:9px;font-size:.92rem;color:#cfd0d2}
-  .feat .ck{
-    width:20px;height:20px;border-radius:50%;flex:none;
-    background:rgba(255,180,58,.15);color:var(--amber);
-    display:grid;place-items:center;font-size:.7rem;font-weight:700;
+  .plan .badge{
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    font-size:.78rem;font-weight:700;color:#1a1205;white-space:nowrap;
+    background:linear-gradient(100deg,var(--amber),var(--amber-deep));
+    padding:6px 14px;border-radius:99px;
   }
-  .boost{
+  .plan h3{font-size:1.25rem;font-weight:700;letter-spacing:-.015em}
+  .plan .cap{color:var(--muted);font-size:.93rem;margin-top:4px}
+  .plan .price{
+    display:flex;align-items:flex-start;gap:3px;line-height:1;
+    font-family:"Bricolage Grotesque",sans-serif;margin:24px 0 4px;
+  }
+  .plan .price .cur{font-size:1.4rem;font-weight:600;color:var(--amber);margin-top:6px}
+  .plan .price .num{font-size:3.6rem;font-weight:800;letter-spacing:-.045em}
+  .plan .price .per{align-self:flex-end;color:var(--muted);font-size:.92rem;margin:0 0 9px 5px;font-family:"DM Sans",sans-serif}
+  .plan .per-car{color:var(--muted);font-size:.84rem}
+  .plan ul{list-style:none;margin:24px 0 28px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .plan li{display:flex;gap:11px;font-size:.94rem;color:var(--ink-2);line-height:1.45}
+  .plan li svg{width:18px;height:18px;flex:none;color:var(--amber);margin-top:1px}
+  .plan li b{color:var(--ink);font-weight:600}
+
+  .plans-note{
     display:flex;align-items:center;gap:16px;
-    margin-top:26px;padding:18px 20px;
-    border:1px solid rgba(255,180,58,.28);
-    background:rgba(255,138,0,.06);
-    border-radius:14px;max-width:46ch;
+    margin:28px auto 0;max-width:720px;padding:16px 20px;
+    border:1px solid rgba(255,180,58,.26);background:rgba(255,138,0,.05);
+    border-radius:14px;
   }
-  .boost-badge{
-    flex:none;font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:800;font-size:1.25rem;color:#1a1205;
-    background:linear-gradient(100deg,var(--amber),var(--amber-deep));
-    width:54px;height:54px;border-radius:12px;
-    display:grid;place-items:center;letter-spacing:-.03em;
-    box-shadow:0 8px 22px -10px rgba(255,138,0,.7);
+  .plans-note .b10{
+    flex:none;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.1rem;
+    color:#1a1205;background:linear-gradient(100deg,var(--amber),var(--amber-deep));
+    width:50px;height:50px;border-radius:12px;display:grid;place-items:center;
   }
-  .boost p{margin:0;color:#cfd0d2;font-size:.93rem;line-height:1.5}
-  .boost p b{color:var(--ink);font-weight:600}
+  .plans-note p{color:var(--ink-2);font-size:.93rem;line-height:1.5}
+  .plans-note p b{color:var(--ink)}
+  .plans-foot{text-align:center;color:var(--muted);font-size:.9rem;margin-top:18px}
+  .plans-foot a{color:var(--amber);text-decoration:none}
 
-  .offer-side{
-    padding:44px 36px;
-    border-left:1px solid var(--line);
-    display:flex;flex-direction:column;justify-content:center;
-    background:rgba(255,255,255,.015);
-  }
-  .price{
-    font-family:"Bricolage Grotesque",sans-serif;
-    display:flex;align-items:flex-start;gap:4px;
-    line-height:1;
-  }
-  .price .cur{font-size:1.5rem;font-weight:600;color:var(--amber);margin-top:6px}
-  .price .num{font-size:4rem;font-weight:800;letter-spacing:-.04em}
-  .price .per{align-self:flex-end;color:var(--muted);font-size:.95rem;margin-bottom:10px;margin-left:4px}
-  .price-sub{color:var(--muted);font-size:.9rem;margin-top:2px;margin-bottom:24px}
 
-  .wa{
-    display:inline-flex;align-items:center;justify-content:center;gap:11px;
-    background:#1faa55;color:#fff;font-weight:600;font-size:1rem;
-    padding:16px 22px;border-radius:13px;text-decoration:none;
-    box-shadow:0 12px 34px -14px rgba(31,170,85,.8);
-    transition:transform .25s,box-shadow .25s;
+  .nosub{
+    display:flex;align-items:center;gap:22px;margin:22px auto 0;max-width:900px;
+    padding:24px 26px;border-radius:18px;
+    border:1px solid rgba(55,196,111,.35);
+    background:linear-gradient(100deg,rgba(31,170,85,.10),rgba(31,170,85,.03));
   }
-  .wa:hover{transform:translateY(-3px);box-shadow:0 18px 40px -14px rgba(31,170,85,.95)}
-  .wa svg{width:21px;height:21px}
-  /* amber contact-us variant in the pricing card */
-  .wa-contact{
-    background:linear-gradient(100deg,var(--amber),var(--amber-deep));
-    color:#1a1205;
-    box-shadow:0 12px 34px -14px rgba(255,138,0,.7);
-  }
-  .wa-contact:hover{box-shadow:0 18px 40px -14px rgba(255,138,0,.9)}
-  .wa-num{display:block;text-align:center;color:var(--muted);font-size:.86rem;margin-top:12px}
-  .wa-num b{color:var(--ink);letter-spacing:.03em}
+  .nosub-ic{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:rgba(31,170,85,.16);color:var(--ok)}
+  .nosub-ic svg{width:26px;height:26px}
+  .nosub h3{font-size:1.2rem;font-weight:700;letter-spacing:-.015em}
+  .nosub p{color:var(--ink-2);font-size:.95rem;line-height:1.55;margin-top:4px;max-width:58ch}
+  .nosub .btn{flex:none;margin-left:auto}
+  @media(max-width:760px){.nosub{flex-direction:column;align-items:flex-start;text-align:left}.nosub .btn{margin-left:0;width:100%}}
 
-  footer{
-    margin-top:64px;padding-top:26px;border-top:1px solid var(--line);
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
-    color:var(--muted);font-size:.85rem;
+  /* ===== FAQ ===== */
+  .faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .faq details{
+    border:1px solid var(--line);border-radius:14px;
+    background:rgba(255,255,255,.025);
+    transition:border-color .2s,background .2s;
   }
-  footer a{color:var(--muted);text-decoration:none}
-  footer a:hover{color:var(--amber)}
-  .powered{display:inline-flex;align-items:center;opacity:.85;transition:opacity .25s,transform .25s}
-  .powered:hover{opacity:1;transform:translateY(-2px)}
-  .powered img{height:30px;width:auto;display:block}
+  .faq details[open]{border-color:var(--line-2);background:rgba(255,255,255,.04)}
+  .faq summary{
+    list-style:none;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:18px 22px;font-weight:600;font-size:1rem;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{
+    content:"+";font-size:1.4rem;font-weight:400;color:var(--amber);line-height:1;
+    transition:transform .25s;
+  }
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{padding:0 22px 20px;color:var(--muted);line-height:1.65;font-size:.95rem}
 
-  /* video / laptop showcase */
-  .showcase{
-    margin-top:12vh;
-    text-align:center;
-  }
-  .showcase .eyebrow{justify-content:center;margin-bottom:18px}
-  .showcase .eyebrow::before{display:none}
-  .showcase h2{
-    font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:800;font-size:clamp(1.6rem,3.4vw,2.4rem);
-    line-height:1.08;letter-spacing:-.03em;
-    max-width:18ch;margin:0 auto;
-  }
-  .showcase .sc-sub{
-    color:var(--muted);font-size:clamp(1rem,1.8vw,1.15rem);
-    line-height:1.6;max-width:46ch;margin:16px auto 0;
-  }
-
-  .laptop{
-    width:min(760px,100%);
-    margin:46px auto 0;
-    filter:drop-shadow(0 40px 70px rgba(0,0,0,.55));
-  }
-  /* screen / lid */
-  .laptop-screen{
-    position:relative;
-    background:#1c1f26;
-    border:1px solid var(--line);
-    border-radius:18px 18px 6px 6px;
-    padding:14px 14px 16px;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),
-               0 0 40px -18px rgba(255,138,0,.4);
-  }
-  .laptop-screen::before{
-    content:"";
-    position:absolute;top:7px;left:50%;transform:translateX(-50%);
-    width:7px;height:7px;border-radius:50%;
-    background:radial-gradient(circle at 40% 40%,#444 0%,#1a1c21 80%);
-  }
-  .laptop-bezel{
-    position:relative;
-    border-radius:8px;
-    overflow:hidden;
-    background:#000;
-    aspect-ratio:16/9;
-    border:1px solid rgba(0,0,0,.6);
-  }
-  .laptop-bezel iframe{
-    position:absolute;inset:0;
-    width:100%;height:100%;border:0;
-  }
-  /* base / hinge */
-  .laptop-base{
-    position:relative;
-    height:18px;width:112%;
-    margin:0 auto;left:-6%;
-    background:linear-gradient(180deg,#23262e 0%,#15171c 60%,#0e0f13 100%);
-    border-radius:0 0 14px 14px;
-    box-shadow:inset 0 2px 4px rgba(255,255,255,.05),
-               0 18px 30px -16px rgba(0,0,0,.8);
-  }
-  .laptop-base::after{
-    content:"";
-    position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:120px;height:7px;
-    background:#0a0b0e;
-    border-radius:0 0 8px 8px;
-    box-shadow:inset 0 -1px 2px rgba(255,255,255,.06);
-  }
-  @media(max-width:760px){
-    .laptop{margin-top:38px}
-    .laptop-screen{padding:10px 10px 12px;border-radius:14px 14px 5px 5px}
-  }
-
-  /* entrance animation */
-  .reveal{opacity:0;transform:translateY(22px);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
-  .d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.31s}
-  .d4{animation-delay:.44s}.d5{animation-delay:.6s}
-  @keyframes rise{to{opacity:1;transform:none}}
-
-  /* marketplace tag inside the price card */
-  .mp-tag{
-    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
-    font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
-    color:#cfe0ff;background:var(--fb-soft);
-    border:1px solid rgba(24,119,242,.32);
-    padding:7px 12px;border-radius:99px;margin-bottom:20px;
-  }
-  .mp-tag svg{width:16px;height:16px;flex:none}
-
-  @media(max-width:760px){
-    .offer{grid-template-columns:1fr}
-    .offer-side{border-left:none;border-top:1px solid var(--line)}
-    .offer-main{padding:34px 28px}
-    .offer-side{padding:34px 28px}
-    .topbar-inner{padding:9px 14px;gap:10px}
-    .brand-name .tag{display:none}
-    .nav-links{gap:7px}
-    .nav-btn{padding:9px 12px;font-size:.84rem;gap:6px}
-  }
-  @media(max-width:520px){
-    .brand-name{display:none}
-    .nav-btn .lbl{display:none}
-    .nav-btn-accent .lbl{display:inline}
-    .nav-btn{padding:9px 11px}
-    .nav-btn-accent{padding:9px 13px}
-  }
-  /* ===== contact section ===== */
-  #contact{scroll-margin-top:90px}
-  .contact{margin-top:12vh}
-  .contact-head{text-align:center;margin-bottom:40px}
-  .contact-head .eyebrow{justify-content:center}
-  .contact-head .eyebrow::before{display:none}
-  .contact-head h2{
-    font-family:"Bricolage Grotesque",sans-serif;
-    font-weight:800;font-size:clamp(1.6rem,3.4vw,2.4rem);
-    line-height:1.08;letter-spacing:-.03em;
-    max-width:20ch;margin:0 auto;
-  }
-  .contact-head .ct-sub{
-    color:var(--muted);font-size:clamp(1rem,1.8vw,1.15rem);
-    line-height:1.6;max-width:48ch;margin:16px auto 0;
-  }
-  .contact-grid{
-    display:grid;grid-template-columns:1.35fr 1fr;gap:24px;
-    align-items:stretch;
-  }
+  /* ===== contact ===== */
+  .contact-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:22px;align-items:stretch}
   .ct-card{
-    border:1px solid var(--line);border-radius:20px;
+    border:1px solid var(--line);border-radius:var(--radius);
     background:linear-gradient(180deg,var(--bg-2),rgba(18,20,25,.4));
-    padding:34px 32px;position:relative;
+    padding:32px 30px;position:relative;
   }
-  /* form */
-  .ct-form{display:flex;flex-direction:column;gap:18px}
-  .field{display:flex;flex-direction:column;gap:8px}
-  .field label{
-    font-size:.82rem;font-weight:600;letter-spacing:.02em;
-    color:var(--ink);
-  }
+  .form{display:flex;flex-direction:column;gap:16px}
+  .field{display:flex;flex-direction:column;gap:7px}
+  .field label{font-size:.85rem;font-weight:600;color:var(--ink)}
   .field label span{color:var(--muted);font-weight:400}
   .field input,.field textarea{
-    font-family:"DM Sans",sans-serif;font-size:.96rem;
+    font-family:"DM Sans",sans-serif;font-size:.97rem;
     color:var(--ink);background:rgba(255,255,255,.04);
     border:1px solid var(--line);border-radius:11px;
     padding:13px 15px;width:100%;resize:vertical;
@@ -512,10 +397,11 @@
   .field input::placeholder,.field textarea::placeholder{color:#6f7174}
   .field input:focus,.field textarea:focus{
     outline:none;border-color:rgba(255,180,58,.55);
-    background:rgba(255,255,255,.06);
-    box-shadow:0 0 0 3px rgba(255,138,0,.12);
+    background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(255,138,0,.12);
   }
-  .ct-submit{
+  .field .hint{font-size:.8rem;color:var(--muted)}
+  .row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .submit{
     display:inline-flex;align-items:center;justify-content:center;gap:10px;
     font-family:"DM Sans",sans-serif;font-weight:700;font-size:1rem;
     color:#1a1205;border:none;cursor:pointer;
@@ -524,59 +410,185 @@
     box-shadow:0 12px 34px -14px rgba(255,138,0,.7);
     transition:transform .25s,box-shadow .25s,opacity .25s;
   }
-  .ct-submit:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(255,138,0,.9)}
-  .ct-submit:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
-  .ct-submit svg{width:18px;height:18px}
-  .ct-result{font-size:.88rem;line-height:1.5;text-align:center;margin-top:2px}
-  .ct-result.err{color:#ff9b8a}
-  .ct-result:empty{display:none}
-  /* thank-you state */
-  .ct-thanks{display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:24px 8px}
-  .ct-card.sent .ct-form{display:none}
-  .ct-card.sent .ct-thanks{display:flex}
-  .ct-thanks .tick{
-    width:64px;height:64px;border-radius:50%;flex:none;
-    display:grid;place-items:center;
+  .submit:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(255,138,0,.9)}
+  .submit:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
+  .submit svg{width:18px;height:18px}
+  .result{font-size:.88rem;line-height:1.5;text-align:center}
+  .result.err{color:#ff9b8a}
+  .result:empty{display:none}
+  .thanks{display:none;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:24px 8px}
+  .ct-card.sent .form{display:none}
+  .ct-card.sent .thanks{display:flex}
+  .tick{
+    width:64px;height:64px;border-radius:50%;flex:none;display:grid;place-items:center;
     background:rgba(31,170,85,.14);border:1px solid rgba(31,170,85,.4);
   }
-  .ct-thanks .tick svg{width:30px;height:30px;color:#37c46f}
-  .ct-thanks h3{
-    font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
-    font-size:1.5rem;letter-spacing:-.02em;
+  .tick svg{width:30px;height:30px;color:var(--ok)}
+  .thanks h3{font-weight:800;font-size:1.5rem;letter-spacing:-.02em}
+  .thanks p{color:var(--muted);font-size:.96rem;line-height:1.6;max-width:40ch}
+  .ct-alt{display:flex;flex-direction:column;justify-content:center;gap:16px}
+  .ct-alt h3{font-weight:700;font-size:1.3rem;letter-spacing:-.02em;line-height:1.15}
+  .ct-alt p{color:var(--muted);font-size:.95rem;line-height:1.6}
+  .wa{
+    display:inline-flex;align-items:center;justify-content:center;gap:11px;
+    background:#1faa55;color:#fff;font-weight:600;font-size:1rem;
+    padding:15px 22px;border-radius:13px;text-decoration:none;
+    box-shadow:0 12px 34px -14px rgba(31,170,85,.8);
+    transition:transform .25s,box-shadow .25s;
   }
-  .ct-thanks p{color:var(--muted);font-size:.96rem;line-height:1.6;max-width:36ch}
-  /* alt / whatsapp panel */
-  .ct-alt{display:flex;flex-direction:column;justify-content:center;gap:18px}
-  .ct-alt .mp-tag{margin-bottom:4px}
-  .ct-alt h3{
-    font-family:"Bricolage Grotesque",sans-serif;font-weight:700;
-    font-size:1.28rem;letter-spacing:-.02em;line-height:1.15;
+  .wa:hover{transform:translateY(-3px)}
+  .wa svg{width:21px;height:21px}
+
+  /* ===== final CTA ===== */
+  .final{
+    margin-top:13vh;text-align:center;
+    border:1px solid rgba(255,180,58,.3);border-radius:26px;
+    padding:56px 28px;
+    background:
+      radial-gradient(600px 300px at 50% 0%,rgba(255,138,0,.18),transparent 70%),
+      linear-gradient(180deg,var(--bg-2),rgba(18,20,25,.5));
   }
-  .ct-alt p{color:var(--muted);font-size:.94rem;line-height:1.6}
-  .ct-alt .wa{margin-top:4px}
-  .ct-divider{
-    display:flex;align-items:center;gap:14px;
-    color:var(--muted);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+  .final h2{font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.03em;line-height:1.06;max-width:20ch;margin:0 auto}
+  .final p{color:var(--muted);margin:14px auto 28px;max-width:46ch;line-height:1.6}
+
+  footer{
+    margin-top:64px;padding:26px 0 48px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+    color:var(--muted);font-size:.86rem;
   }
-  .ct-divider::before,.ct-divider::after{
-    content:"";flex:1;height:1px;background:var(--line);
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--amber)}
+  .powered{display:inline-flex;align-items:center;opacity:.85;transition:opacity .25s}
+  .powered:hover{opacity:1}
+  .powered img{height:30px;width:auto;display:block}
+
+  /* ===== order modal ===== */
+  .modal{
+    position:fixed;inset:0;z-index:100;
+    display:none;align-items:center;justify-content:center;
+    padding:24px 16px;
+    background:rgba(5,6,8,.72);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  }
+  .modal.open{display:flex;animation:fadeIn .25s ease}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal-box{
+    position:relative;width:100%;max-width:580px;max-height:calc(100vh - 48px);overflow-y:auto;
+    border:1px solid var(--line-2);border-radius:22px;
+    background:linear-gradient(180deg,#15171d,#101216);
+    box-shadow:0 40px 100px -30px rgba(0,0,0,.8);
+    padding:32px 30px 28px;
+    animation:pop .3s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes pop{from{transform:translateY(14px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+  .modal-close{
+    position:absolute;top:14px;right:14px;
+    width:38px;height:38px;border-radius:10px;border:1px solid var(--line);
+    background:rgba(255,255,255,.04);color:var(--ink-2);cursor:pointer;
+    display:grid;place-items:center;transition:background .2s,color .2s;
+  }
+  .modal-close:hover{background:rgba(255,255,255,.09);color:var(--ink)}
+  .modal-close svg{width:18px;height:18px}
+  .modal h2{font-weight:800;font-size:1.65rem;letter-spacing:-.025em;line-height:1.1;padding-right:40px}
+  .modal .m-sub{color:var(--muted);font-size:.95rem;margin:8px 0 22px;line-height:1.55}
+
+  .pkg-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .pkg-pick label{
+    position:relative;cursor:pointer;
+    border:1px solid var(--line);border-radius:13px;
+    padding:13px 12px;background:rgba(255,255,255,.03);
+    transition:border-color .2s,background .2s;
+  }
+  .pkg-pick input{position:absolute;opacity:0;pointer-events:none}
+  .pkg-pick .pn{display:block;font-weight:700;font-size:.93rem}
+  .pkg-pick .pc{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+  .pkg-pick .pp{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.3rem;margin-top:8px;letter-spacing:-.02em}
+  .pkg-pick .pp small{font-family:"DM Sans",sans-serif;font-size:.75rem;color:var(--muted);font-weight:500}
+  .pkg-pick label:hover{border-color:var(--line-2)}
+  .pkg-pick input:checked + span{display:block}
+  .pkg-pick label:has(input:checked){
+    border-color:rgba(255,180,58,.7);background:rgba(255,138,0,.08);
+    box-shadow:0 0 0 3px rgba(255,138,0,.12);
+  }
+  .pkg-pick input:focus-visible ~ .pn{text-decoration:underline}
+  .secure{display:flex;align-items:center;justify-content:center;gap:7px;color:var(--muted);font-size:.8rem}
+  .secure svg{width:14px;height:14px}
+
+  .order-done{display:none;text-align:center;flex-direction:column;align-items:center;gap:14px;padding:6px 0 4px}
+  .modal-box.done .order-form-wrap{display:none}
+  .modal-box.done .order-done{display:flex}
+  .order-done h2{padding-right:0}
+  .order-done .lead{color:var(--ink-2);line-height:1.6;max-width:42ch}
+  .summary{
+    width:100%;text-align:left;margin:6px 0 4px;
+    border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);
+  }
+  .summary div{display:flex;justify-content:space-between;gap:14px;padding:12px 16px;border-top:1px solid var(--line);font-size:.93rem}
+  .summary div:first-child{border-top:none}
+  .summary span{color:var(--muted)}
+  .summary b{font-weight:600;text-align:right;word-break:break-word}
+  .summary .tot b{font-family:"Bricolage Grotesque",sans-serif;font-size:1.2rem;font-weight:800}
+  .step-note{
+    width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;
+    padding:14px 16px;border-radius:12px;
+    background:rgba(255,138,0,.07);border:1px solid rgba(255,180,58,.3);
+    color:var(--ink-2);font-size:.9rem;line-height:1.5;
+  }
+  .step-note svg{width:18px;height:18px;flex:none;color:var(--amber);margin-top:2px}
+  .small-muted{color:var(--muted);font-size:.84rem;line-height:1.5}
+  .small-muted a{color:var(--amber);text-decoration:none}
+
+  /* entrance animation */
+  .reveal{opacity:0;transform:translateY(22px);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+  .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.27s}.d4{animation-delay:.38s}.d5{animation-delay:.5s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ===== responsive ===== */
+  @media(max-width:960px){
+    .hero{grid-template-columns:1fr;gap:36px;padding-top:9vh}
+    .hero-panel{max-width:520px}
+    .plans{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+    .plan.featured{order:-1}
+    .trust{grid-template-columns:repeat(2,1fr)}
+    .trust div:nth-child(3){border-left:none}
+    .trust div:nth-child(n+3){border-top:1px solid var(--line)}
   }
   @media(max-width:760px){
+    .wrap{padding:0 18px}
+    .topbar-inner{padding:9px 14px;gap:10px}
+    .brand-name .tag{display:none}
+    .nav-link.hide-sm{display:none}
+    .steps{grid-template-columns:1fr}
     .contact-grid{grid-template-columns:1fr}
-    .ct-card{padding:28px 22px}
+    .ct-card{padding:26px 20px}
+    .row-2{grid-template-columns:1fr}
+    .modal-box{padding:28px 20px 22px}
+    .pkg-pick{grid-template-columns:1fr}
+    .pkg-pick label{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .pkg-pick .pp{margin-top:0}
+    .pkg-pick .pinfo{display:flex;flex-direction:column}
+    .final{padding:42px 20px}
   }
-
+  @media(max-width:520px){
+    .brand-name{display:none}
+    .nav-link{padding:9px 9px;font-size:.88rem}
+    .nav-cta{padding:10px 14px;margin-left:2px}
+    .trust{grid-template-columns:1fr}
+    .trust div{border-left:none!important;border-top:1px solid var(--line)}
+    .trust div:first-child{border-top:none}
+    .cta-row .btn{width:100%}
+  }
   @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
     .reveal{animation:none;opacity:1;transform:none}
-    .btn,.wa{transition:none}
-    .brand-mark{transition:none}
-    .brand-mark .cc-signal{animation:none;opacity:.85}
+    .modal.open,.modal-box{animation:none}
+    .btn,.wa,.plan,.brand-mark{transition:none}
   }
 </style>
 </head>
 <body>
 
-<header class="topbar reveal d1">
+<header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/" aria-label="CarConnect — home">
       <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="CarConnect — cars on Facebook Marketplace">
@@ -618,118 +630,212 @@
       </svg>
       <span class="brand-name">
         <span class="word">Car<b>Connect</b></span>
-        <span class="tag">On Facebook Marketplace</span>
+        <span class="tag">Dealer inventory on Facebook Marketplace</span>
       </span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a class="nav-btn nav-btn-fb" href="https://www.facebook.com/marketplace/profile/61574536745123/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 5 4h14l2 5"/><path d="M3 9c1.7 1.8 3.6 1.8 5.3 0 1.7 1.8 3.6 1.8 5.4 0 1.7 1.8 3.6 1.8 5.3 0"/><path d="M4.5 12.5V20h15v-7.5"/></svg>
-        <span class="lbl">Inventory</span>
-      </a>
-      <a class="nav-btn" href="#dealers">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9 5 4h14l2 5a3 3 0 0 1-5.2 2A3 3 0 0 1 12 11a3 3 0 0 1-3.8 0A3 3 0 0 1 3 9z"/><path d="M5 12.5V20h14v-7.5"/></svg>
-        <span class="lbl">For Dealers</span>
-      </a>
-      <a class="nav-btn nav-btn-accent" href="#contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 6 8 6 8-6"/></svg>
-        <span class="lbl">Contact</span>
+      <a class="nav-link hide-sm" href="#how">How it works</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link hide-sm" href="#contact">Contact</a>
+      <a class="nav-cta" href="#pricing">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        Post Your Cars
       </a>
     </nav>
   </div>
 </header>
 
-<div class="wrap">
+<main class="wrap">
 
-  <header>
-    <span class="eyebrow reveal d1">Vehicles · Listed · Sold</span>
-    <h1 class="reveal d2">Get your inventory <span class="glow">in front of buyers</span> on Facebook Marketplace.</h1>
-    <p class="lede reveal d3">Browse our current vehicle inventory or search live listings on Facebook Marketplace — plus 20 active Facebook car-buying groups, all in one place. The fastest route between your cars and your next customer.</p>
-
-    <div class="cta-row reveal d4">
-      <a class="btn btn-primary" href="https://www.facebook.com/marketplace/profile/61559047695077/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v7H3V3zm0 11h7v7H3v-7zm11-11h7v7h-7V3zm0 11h7v7h-7v-7z"/></svg>
-        Check Our Inventory
-        <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
-      </a>
-      <a class="btn btn-ghost" href="https://carconnect.click/search" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        Search on Facebook Marketplace
-        <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
-      </a>
-    </div>
-  </header>
-
-  <section class="showcase reveal d5" aria-label="How CarConnect works">
-    <span class="eyebrow">See It In Action</span>
-    <h2>Watch how CarConnect gets your cars seen.</h2>
-    <p class="sc-sub">A quick look at how we put your inventory in front of local buyers on Facebook Marketplace.</p>
-    <div class="laptop">
-      <div class="laptop-screen">
-        <div class="laptop-bezel">
-          <iframe src="https://www.youtube.com/embed/9pNUtoy72pU?si=Xlz-bdcQ7zJwjKO-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div>
+      <span class="kicker reveal d1"><span class="dot"></span>No subscription · Pay once, re-order anytime</span>
+      <h1 class="reveal d2">Your inventory, posted to Facebook Marketplace for you.</h1>
+      <p class="lede reveal d3">Send us your dealership or auction website. We post your vehicles to Facebook Marketplace every week for a full month, put part of your payment into boosting them, and buyers contact you directly. One-time payment, no subscription.</p>
+      <div class="cta-row reveal d4">
+        <a class="btn btn-primary" href="#pricing">
+          Post Your Cars — See Packages
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
       </div>
-      <div class="laptop-base"></div>
+      <div class="hero-links reveal d5">
+        <a href="https://www.facebook.com/marketplace/profile/61559047695077/" target="_blank" rel="noopener">
+          See our live Marketplace listings
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+        <a href="https://carconnect.click/search" target="_blank" rel="noopener">
+          Search Facebook Marketplace
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <aside class="hero-panel reveal d4" aria-label="Packages at a glance">
+      <h2>One-time packages</h2>
+      <p class="hp-sub">No subscription. Pay once, re-order whenever you need us.</p>
+      <div class="hp-row"><div class="cars">Up to 20 vehicles<small>Starter</small></div><div class="amt">$199<span> one-time</span></div></div>
+      <div class="hp-row"><div class="cars">Up to 40 vehicles<small>Growth</small></div><div class="amt">$349<span> one-time</span></div></div>
+      <div class="hp-row"><div class="cars">Up to 60 vehicles<small>Pro</small></div><div class="amt">$599<span> one-time</span></div></div>
+      <button type="button" class="btn btn-primary btn-block" data-order="growth">Place Order</button>
+    </aside>
+  </section>
+
+  <div class="trust reveal d5">
+    <div><b>Posted weekly</b><span>Each order covers a month of weekly postings</span></div>
+    <div><b>Direct buyer leads</b><span>Buyers message you, not us</span></div>
+    <div><b>10% to boosting</b><span>Part of every payment promotes your cars</span></div>
+    <div><b>No subscription</b><span>Pay once, re-order anytime</span></div>
+  </div>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="sec" id="how">
+    <div class="sec-head">
+      <h2>Three steps from your lot to Marketplace.</h2>
+      <p>You keep selling. We handle the posting.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="n"></span>
+        <h3>Choose a package</h3>
+        <p>Pick the plan that fits your inventory size and place your order with your dealership or auction website.</p>
+      </div>
+      <div class="step">
+        <span class="n"></span>
+        <h3>Complete payment</h3>
+        <p>Pay securely through Stripe. Once payment is confirmed, we pull your vehicles from your website and prepare the listings.</p>
+      </div>
+      <div class="step">
+        <span class="n"></span>
+        <h3>Buyers contact you</h3>
+        <p>Your cars go live on Facebook Marketplace every week for the month, with boosting, and interested buyers reach out to you directly.</p>
+      </div>
     </div>
   </section>
 
-  <section class="offer reveal d5" id="dealers">
-    <div class="offer-main">
-      <div class="offer-tag">For Dealers &amp; Sellers</div>
-      <h2>Want all your inventory posted to Facebook Marketplace — twice every month?</h2>
-      <p>We handle the listings so you don't have to. Full inventory, posted consistently, reaching real local buyers where they're already shopping — and interested buyers contact you directly, no middleman. On top of Facebook Marketplace, every vehicle is also posted to <b>20 Facebook car-buying groups</b> for maximum local reach.</p>
-      <div class="feat">
-        <div><span class="ck">✓</span> Automatic listing</div>
-        <div><span class="ck">✓</span> Posted 2× / month</div>
-        <div><span class="ck">✓</span> Buyers contact you directly</div>
-        <div><span class="ck">✓</span> Marketplace + 20 car-buy groups</div>
-      </div>
-      <div class="boost">
-        <span class="boost-badge">10%</span>
-        <p><b>10% of your payment goes straight to boosting your vehicles</b> on Facebook Marketplace — putting your listings in front of even more local buyers.</p>
-      </div>
+
+  <!-- ===== PRICING ===== -->
+  <section class="sec" id="pricing">
+    <div class="sec-head center">
+      <h2>Simple pricing based on inventory size.</h2>
+      <p>One-time payment per order. Every package includes the same full service, so choose the one that covers the number of vehicles you want listed.</p>
     </div>
-    <div class="offer-side">
-      <div class="mp-tag">
-        <svg viewBox="0 0 24 24" fill="#cfe0ff"><path d="M2.5 9 L5 4 H19 L21.5 9 Z"/><path d="M2.5 9 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 L21.5 9 Z"/></svg>
-        Live on Facebook Marketplace
+
+    <div class="plans">
+      <article class="plan">
+        <h3>Starter</h3>
+        <p class="cap">Up to 20 vehicles</p>
+        <div class="price"><span class="cur">$</span><span class="num">199</span><span class="per">one-time</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Up to 20 vehicles</b> posted to Facebook Marketplace</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Posted <b>every week for one month</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>10% of your payment spent on boosting</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Buyers contact you directly</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>No subscription, re-order anytime</span></li>
+        </ul>
+        <button type="button" class="btn btn-ghost btn-block" data-order="starter">Place Order</button>
+      </article>
+
+      <article class="plan featured">
+        <span class="badge">Most popular</span>
+        <h3>Growth</h3>
+        <p class="cap">Up to 40 vehicles</p>
+        <div class="price"><span class="cur">$</span><span class="num">349</span><span class="per">one-time</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Up to 40 vehicles</b> posted to Facebook Marketplace</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Posted <b>every week for one month</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>10% of your payment spent on boosting</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Buyers contact you directly</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>No subscription, re-order anytime</span></li>
+        </ul>
+        <button type="button" class="btn btn-primary btn-block" data-order="growth">Place Order</button>
+      </article>
+
+      <article class="plan">
+        <h3>Pro</h3>
+        <p class="cap">Up to 60 vehicles</p>
+        <div class="price"><span class="cur">$</span><span class="num">599</span><span class="per">one-time</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><b>Up to 60 vehicles</b> posted to Facebook Marketplace</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Posted <b>every week for one month</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>10% of your payment spent on boosting</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Buyers contact you directly</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>No subscription, re-order anytime</span></li>
+        </ul>
+        <button type="button" class="btn btn-ghost btn-block" data-order="pro">Place Order</button>
+      </article>
+    </div>
+
+    <div class="plans-note">
+      <span class="b10">10%</span>
+      <p><b>10% of every payment goes straight into boosting your vehicles</b> on Facebook Marketplace, putting your listings in front of even more local buyers.</p>
+    </div>
+
+    <div class="nosub">
+      <div class="nosub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div>
+      <div>
+        <h3>No subscription. No strings attached.</h3>
+        <p>We don't trap you in a monthly subscription. Pay once for the package you need, and re-order anytime you want your cars back in front of buyers.</p>
       </div>
-      <div class="price">
-        <span class="cur">$</span><span class="num">199</span><span class="per">/ month</span>
-      </div>
-      <div class="price-sub">Flat rate · no contracts</div>
-      <a class="wa wa-contact" href="#contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 6 8 6 8-6"/></svg>
-        Contact Us
-      </a>
-      <span class="wa-num">Or message us on WhatsApp at <b>737&nbsp;349&nbsp;2749</b></span>
+      <a class="btn btn-ghost" href="#pricing" data-order="growth">Order Now</a>
+    </div>
+    <p class="plans-foot">More than 60 vehicles? <a href="#contact">Contact us</a> for a custom quote.</p>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="sec" id="faq">
+    <div class="sec-head center">
+      <h2>Questions dealers ask.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>What do you need from me to get started?</summary>
+        <p>Just your dealership or auction website where your current inventory is listed. We use it to build your Facebook Marketplace listings, so you don't need to send photos or descriptions separately.</p>
+      </details>
+      <details>
+        <summary>Who do buyers contact?</summary>
+        <p>You. Interested buyers reach out to you directly, so there's no middleman between you and your customer.</p>
+      </details>
+      <details>
+        <summary>How often are my vehicles posted?</summary>
+        <p>Each order covers one month, during which your inventory is posted to Facebook Marketplace every week, and 10% of your payment is used to boost your vehicles for extra reach.</p>
+      </details>
+      <details>
+        <summary>Is this a monthly subscription?</summary>
+        <p>No. We don't lock you into a subscription or a contract. You pay once per order, and whenever you want your inventory posted again, just place a new order.</p>
+      </details>
+      <details>
+        <summary>What if I have more than 60 vehicles?</summary>
+        <p>Send us a message or reach us on WhatsApp and we'll put together a package for your inventory size.</p>
+      </details>
     </div>
   </section>
 
-  <section class="contact reveal d5" id="contact" aria-label="Contact CarConnect">
-    <div class="contact-head">
-      <span class="eyebrow">Get In Touch</span>
-      <h2>Ready to get your inventory on Marketplace?</h2>
-      <p class="ct-sub">Send us a message and we'll reply quickly — or reach out instantly on WhatsApp. Either way, let's get your vehicles in front of local buyers.</p>
+  <!-- ===== CONTACT ===== -->
+  <section class="sec" id="contact" aria-label="Contact CarConnect">
+    <div class="sec-head center">
+      <h2>Have a question first?</h2>
+      <p>Send us a message and we'll reply quickly, or reach us instantly on WhatsApp.</p>
     </div>
 
     <div class="contact-grid">
-      <!-- form card -->
       <div class="ct-card" id="contactCard">
-        <form class="ct-form" id="contactForm" novalidate>
+        <form class="form" id="contactForm" novalidate>
           <input type="hidden" name="access_key" value="a5475b5f-2cd9-4c12-a77a-693c7a39f73a">
-          <input type="hidden" name="subject" value="I'm interested in CarConnect Facebook Marketplace Service">
+          <input type="hidden" name="subject" value="CarConnect — New question from the website">
           <input type="hidden" name="from_name" value="CarConnect Website">
-          <!-- honeypot spam protection -->
           <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="display:none">
 
-          <div class="field">
-            <label for="ct-name">Name</label>
-            <input type="text" id="ct-name" name="name" required autocomplete="name" placeholder="Your name">
-          </div>
-          <div class="field">
-            <label for="ct-email">Email</label>
-            <input type="email" id="ct-email" name="email" required autocomplete="email" placeholder="you@example.com">
+          <div class="row-2">
+            <div class="field">
+              <label for="ct-name">Name</label>
+              <input type="text" id="ct-name" name="name" required autocomplete="name" placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="ct-email">Email</label>
+              <input type="email" id="ct-email" name="email" required autocomplete="email" placeholder="you@example.com">
+            </div>
           </div>
           <div class="field">
             <label for="ct-phone">Phone <span>(optional)</span></label>
@@ -739,96 +845,281 @@
             <label for="ct-message">Message</label>
             <textarea id="ct-message" name="message" rows="4" required placeholder="Tell us about your dealership and how many vehicles you'd like listed."></textarea>
           </div>
-          <button type="submit" class="ct-submit" id="ctSubmit">
+          <button type="submit" class="submit" id="ctSubmit">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
-            <span class="ct-submit-label">Send Message</span>
+            <span class="lbl">Send Message</span>
           </button>
-          <p class="ct-result" id="ctResult" role="status" aria-live="polite"></p>
+          <p class="result" id="ctResult" role="status" aria-live="polite"></p>
         </form>
 
-        <div class="ct-thanks">
-          <span class="tick">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          </span>
-          <h3>Thank you!</h3>
-          <p>Your message has been sent. We'll get back to you shortly — usually within one business day.</p>
+        <div class="thanks">
+          <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <h3>Message sent</h3>
+          <p>Thanks for reaching out. We'll get back to you shortly, usually within one business day.</p>
         </div>
       </div>
 
-      <!-- whatsapp / alt panel -->
       <div class="ct-card ct-alt">
-        <div class="mp-tag">
-          <svg viewBox="0 0 24 24" fill="#cfe0ff"><path d="M2.5 9 L5 4 H19 L21.5 9 Z"/><path d="M2.5 9 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 q2.375 2.5 4.75 0 L21.5 9 Z"/></svg>
-          Prefer to chat?
-        </div>
-        <h3>Message us on WhatsApp</h3>
-        <p>Get a fast, direct reply. Tap below and we'll help you get started with the $199/month Marketplace posting service.</p>
-        <a class="wa" href="https://wa.me/17373492749?text=Hi%20CarConnect%2C%20I%27m%20interested%20in%20the%20CarConnect%20Facebook%20Marketplace%20Service." target="_blank" rel="noopener">
+        <h3>Prefer to chat? Message us on WhatsApp.</h3>
+        <p>Get a fast, direct reply and we'll help you pick the right package for your inventory.</p>
+        <a class="wa" href="https://wa.me/17373492749?text=Hi%20CarConnect%2C%20I%27m%20interested%20in%20posting%20my%20cars%20on%20Facebook%20Marketplace." target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35zM12 22a10 10 0 0 1-5.1-1.39L2 22l1.43-4.78A10 10 0 1 1 12 22z"/></svg>
-          Contact on WhatsApp
+          Chat on WhatsApp
         </a>
-        <div class="ct-divider">WhatsApp only</div>
-        <p style="margin-top:-4px">Reach us on WhatsApp at <b style="color:var(--ink);letter-spacing:.03em">737&nbsp;349&nbsp;2749</b></p>
+        <p>WhatsApp: <b style="color:var(--ink);letter-spacing:.03em">737&nbsp;349&nbsp;2749</b></p>
       </div>
     </div>
   </section>
 
-  <footer class="reveal d5">
-    <span>© 2026 CarConnect · Marketplace Vehicle Service</span>
+  <!-- ===== FINAL CTA ===== -->
+  <section class="final">
+    <h2>Ready to get your cars in front of local buyers?</h2>
+    <p>Choose a package, send us your website, and we'll take it from there.</p>
+    <a class="btn btn-primary" href="#pricing">
+      Post Your Cars
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <footer>
+    <span>© 2026 CarConnect · Facebook Marketplace Vehicle Posting</span>
     <a class="powered" href="https://flowcetra.com/" target="_blank" rel="noopener" aria-label="Powered by Flowcetra">
       <img src="https://ppi.is-best.net/pictures/flowcetra1.png" alt="Flowcetra">
     </a>
-    <span><a href="https://wa.me/17373492749" target="_blank" rel="noopener">WhatsApp: 737 349 2749</a></span>
+    <a href="https://wa.me/17373492749" target="_blank" rel="noopener">WhatsApp: 737 349 2749</a>
   </footer>
+</main>
 
+<!-- ===== ORDER MODAL ===== -->
+<div class="modal" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderTitle" aria-hidden="true">
+  <div class="modal-box" id="orderBox">
+    <button type="button" class="modal-close" id="orderClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+
+    <div class="order-form-wrap">
+      <h2 id="orderTitle">Place your order</h2>
+      <p class="m-sub">Tell us where your inventory lives. After you submit, you'll be taken to secure payment to complete your order.</p>
+
+      <form class="form" id="orderForm" novalidate>
+        <input type="hidden" name="access_key" value="a5475b5f-2cd9-4c12-a77a-693c7a39f73a">
+        <input type="hidden" name="subject" id="orderSubject" value="CarConnect — New order">
+        <input type="hidden" name="from_name" value="CarConnect Orders">
+        <input type="hidden" name="price" id="orderPrice" value="">
+        <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="display:none">
+
+        <fieldset style="border:0">
+          <legend style="font-size:.85rem;font-weight:600;margin-bottom:8px">Package</legend>
+          <div class="pkg-pick">
+            <label>
+              <input type="radio" name="package" value="starter">
+              <span class="pinfo"><span class="pn">Starter</span><span class="pc">Up to 20 cars</span></span>
+              <span class="pp">$199<small> once</small></span>
+            </label>
+            <label>
+              <input type="radio" name="package" value="growth" checked>
+              <span class="pinfo"><span class="pn">Growth</span><span class="pc">Up to 40 cars</span></span>
+              <span class="pp">$349<small> once</small></span>
+            </label>
+            <label>
+              <input type="radio" name="package" value="pro">
+              <span class="pinfo"><span class="pn">Pro</span><span class="pc">Up to 60 cars</span></span>
+              <span class="pp">$599<small> once</small></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="or-name">Full name</label>
+            <input type="text" id="or-name" name="name" required autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="or-email">Email</label>
+            <input type="email" id="or-email" name="email" required autocomplete="email" placeholder="you@dealership.com">
+          </div>
+        </div>
+        <div class="field">
+          <label for="or-phone">Phone <span>(optional)</span></label>
+          <input type="tel" id="or-phone" name="phone" autocomplete="tel" placeholder="(000) 000-0000">
+        </div>
+        <div class="field">
+          <label for="or-site">Dealership or auction website</label>
+          <input type="text" id="or-site" name="website" required inputmode="url" autocomplete="url" placeholder="www.yourdealership.com">
+          <span class="hint">The page where your current inventory is listed.</span>
+        </div>
+
+        <button type="submit" class="submit" id="orSubmit">
+          <span class="lbl">Submit Order</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="result" id="orResult" role="status" aria-live="polite"></p>
+        <p class="secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          Payment is processed securely by Stripe
+        </p>
+      </form>
+    </div>
+
+    <div class="order-done" aria-live="polite">
+      <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <h2>Thank you for your order<span id="doneName"></span>!</h2>
+      <p class="lead">We've received your details. To complete your order, please make your payment below. We'll start working on your listings as soon as payment is confirmed.</p>
+
+      <div class="summary">
+        <div><span>Package</span><b id="sumPkg"></b></div>
+        <div><span>Website</span><b id="sumSite"></b></div>
+        <div class="tot"><span>Due today</span><b id="sumPrice"></b></div>
+      </div>
+
+      <div class="step-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span>Your order isn't complete until payment is made. Use the same email on the payment page so we can match it to your order.</span>
+      </div>
+
+      <a class="btn btn-primary btn-block" id="payBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <span id="payLbl">Complete Payment</span>
+      </a>
+      <p class="small-muted">Questions about your order? <a href="https://wa.me/17373492749" target="_blank" rel="noopener">Message us on WhatsApp</a>.</p>
+    </div>
+  </div>
 </div>
 
 <script>
-  (function(){
-    var form = document.getElementById('contactForm');
-    if(!form) return;
-    var card = document.getElementById('contactCard');
-    var submit = document.getElementById('ctSubmit');
-    var label = submit.querySelector('.ct-submit-label');
-    var result = document.getElementById('ctResult');
+(function(){
+  var PLANS = {
+    starter:{ name:'Starter', cars:'Up to 20 vehicles', price:'$199', link:'https://buy.stripe.com/fZu5kD3e44wW1Eo5Wh04807' },
+    growth: { name:'Growth',  cars:'Up to 40 vehicles', price:'$349', link:'https://buy.stripe.com/8x214n5mc5B05UE2K504808' },
+    pro:    { name:'Pro',     cars:'Up to 60 vehicles', price:'$599', link:'https://buy.stripe.com/aFadR9cOE9RggzidoJ04809' }
+  };
+  var W3F = 'https://api.web3forms.com/submit';
 
-    form.addEventListener('submit', async function(e){
-      e.preventDefault();
-      result.textContent = '';
-      result.className = 'ct-result';
+  /* ---------- order modal ---------- */
+  var modal = document.getElementById('orderModal');
+  var box = document.getElementById('orderBox');
+  var form = document.getElementById('orderForm');
+  var submit = document.getElementById('orSubmit');
+  var sLabel = submit.querySelector('.lbl');
+  var result = document.getElementById('orResult');
+  var lastFocus = null;
 
-      // basic native validation
-      if(!form.checkValidity()){
-        form.reportValidity();
-        return;
-      }
+  function setPlan(key){
+    var r = form.querySelector('input[name="package"][value="'+key+'"]');
+    if(r) r.checked = true;
+  }
+  function openModal(key){
+    lastFocus = document.activeElement;
+    if(box.classList.contains('done')){ resetOrder(); }
+    if(key) setPlan(key);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open');
+    setTimeout(function(){ var n=document.getElementById('or-name'); if(n) n.focus(); }, 60);
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-open');
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function resetOrder(){
+    box.classList.remove('done');
+    form.reset();
+    submit.disabled = false; sLabel.textContent = 'Submit Order';
+    result.textContent = ''; result.className = 'result';
+  }
 
-      submit.disabled = true;
-      label.textContent = 'Sending…';
+  document.querySelectorAll('[data-order]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openModal(el.getAttribute('data-order')); });
+  });
+  document.getElementById('orderClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
-      var data = Object.fromEntries(new FormData(form));
+  function normalizeUrl(v){
+    v = (v||'').trim();
+    if(!v) return '';
+    if(!/^https?:\/\//i.test(v)) v = 'https://' + v;
+    try{ var u = new URL(v); return /\./.test(u.hostname) ? u.href : ''; }catch(_){ return ''; }
+  }
 
-      try{
-        var res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        var json = await res.json();
-        if(res.ok && json.success){
-          card.classList.add('sent');
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          throw new Error(json.message || 'Submission failed');
-        }
-      }catch(err){
-        submit.disabled = false;
-        label.textContent = 'Send Message';
-        result.textContent = 'Sorry, something went wrong. Please try again or reach us on WhatsApp.';
-        result.className = 'ct-result err';
-      }
-    });
-  })();
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    result.textContent = ''; result.className = 'result';
+
+    var site = document.getElementById('or-site');
+    var url = normalizeUrl(site.value);
+    site.setCustomValidity(url ? '' : 'Please enter a valid website, e.g. www.yourdealership.com');
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+
+    var key = (form.querySelector('input[name="package"]:checked')||{}).value || 'growth';
+    var plan = PLANS[key];
+    site.value = url;
+    document.getElementById('orderSubject').value = 'CarConnect — New Order: ' + plan.name + ' (' + plan.cars + ') ' + plan.price + ' (one-time)';
+    document.getElementById('orderPrice').value = plan.price + ' one-time';
+
+    var data = Object.fromEntries(new FormData(form));
+    data.package = plan.name + ' — ' + plan.cars;
+
+    submit.disabled = true; sLabel.textContent = 'Submitting…';
+
+    try{
+      var res = await fetch(W3F, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify(data)
+      });
+      var json = await res.json();
+      if(!(res.ok && json.success)) throw new Error(json.message || 'Submission failed');
+
+      var first = (data.name||'').trim().split(/\s+/)[0];
+      document.getElementById('doneName').textContent = first ? ', ' + first : '';
+      document.getElementById('sumPkg').textContent = plan.name + ' · ' + plan.cars;
+      document.getElementById('sumSite').textContent = url.replace(/^https?:\/\//,'').replace(/\/$/,'');
+      document.getElementById('sumPrice').textContent = plan.price + ' (one-time)';
+      document.getElementById('payLbl').textContent = 'Complete Payment · ' + plan.price;
+      var pay = plan.link + (data.email ? '?prefilled_email=' + encodeURIComponent(data.email) : '');
+      document.getElementById('payBtn').href = pay;
+
+      box.classList.add('done');
+      box.scrollTop = 0;
+    }catch(err){
+      submit.disabled = false; sLabel.textContent = 'Submit Order';
+      result.textContent = 'Sorry, something went wrong. Please try again or reach us on WhatsApp at 737 349 2749.';
+      result.className = 'result err';
+    }
+  });
+
+  /* ---------- contact form ---------- */
+  var cForm = document.getElementById('contactForm');
+  var cCard = document.getElementById('contactCard');
+  var cSubmit = document.getElementById('ctSubmit');
+  var cLabel = cSubmit.querySelector('.lbl');
+  var cResult = document.getElementById('ctResult');
+
+  cForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    cResult.textContent = ''; cResult.className = 'result';
+    if(!cForm.checkValidity()){ cForm.reportValidity(); return; }
+    cSubmit.disabled = true; cLabel.textContent = 'Sending…';
+    try{
+      var res = await fetch(W3F, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(cForm)))
+      });
+      var json = await res.json();
+      if(!(res.ok && json.success)) throw new Error(json.message || 'Submission failed');
+      cCard.classList.add('sent');
+      cCard.scrollIntoView({ behavior:'smooth', block:'center' });
+    }catch(err){
+      cSubmit.disabled = false; cLabel.textContent = 'Send Message';
+      cResult.textContent = 'Sorry, something went wrong. Please try again or reach us on WhatsApp.';
+      cResult.className = 'result err';
+    }
+  });
+})();
 </script>
 </body>
 </html>
